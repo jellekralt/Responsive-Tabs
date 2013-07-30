@@ -51,8 +51,18 @@
         this.loadEvents();
 
         // Window resize bind to check state
-        $(window).bind('resize', function(e) {
+        $(window).on('resize', function(e) {
             o.setState(e);
+        });
+
+        // Hashchange event
+        $(window).on('hashchange', function(e) {
+            var tabRef = o.getTabRefBySelector(window.location.hash);
+
+            if(tabRef >= 0) {
+                o.openTab(e, o.getTab(tabRef), true);
+            }
+
         });
 
         // Start rotate event
@@ -68,7 +78,15 @@
             o.options.deactivate.call(this, e);
         });
         this.$element.bind('tabs-load', function(e) {
-            var firstTab = o.getTab(0);
+            var tabRef = o.getTabRefBySelector(window.location.hash);
+            var firstTab;
+
+            if(tabRef >= 0) {
+                firstTab = o.getTab(tabRef);
+            } else {
+                firstTab = o.getTab(0);
+            }
+            
             o.openTab(e, firstTab); // Open first tab
             o.setState(e); // Set state
             o.options.load.call(this, e, firstTab); // Call the load callback
@@ -97,6 +115,7 @@
                 tab: $(this),
                 anchor: $('a', $tab),
                 panel: $panel,
+                selector: panelSelector,
                 accordionTab: $accordionTab,
                 accordionAnchor: $accordionAnchor,
                 active: false
@@ -186,8 +205,16 @@
         return this.tabs[numRef];
     };
 
-    ResponsiveTabs.prototype.getCurrentTab = function() {
+    ResponsiveTabs.prototype.getTabRefBySelector = function(selector) {
+        for (var i=0; i<this.tabs.length; i++) {
+            if(this.tabs[i].selector === selector) {
+                return i;
+            }
+        }
+        return -1;
+    };
 
+    ResponsiveTabs.prototype.getCurrentTab = function() {
         return this.getTab(this.getCurrentTabRef());
     };
 
@@ -215,6 +242,7 @@
                 return i;
             }
         }
+        return -1;
     };
 
     ResponsiveTabs.prototype.startRotation = function() {
