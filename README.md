@@ -8,7 +8,13 @@ Features
 =========
 
 + Tabs transform to accordion based on breakpoint
-+ Depends on jQuery for the tab functionality
++ Uses javascript / jQuery for the technical tab switching (class based)
++ Uses CSS for the desktop/tablet/mobile view
++ Has callback events for the tab events
++ Tabs can be opened with URL hashes
++ Tabs can auto rotate
++ Tabs can be collapsed (optional)
++ Tabs can start collapsed based on the view (optional)
 + Cross browser compatibility (IE7+, Chrome, Firefox, Safari and Opera)
 + Multiple device support (Web, Tablet, Mobile, etc)
 
