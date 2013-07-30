@@ -10,7 +10,8 @@
     // Defaults
     var defaults = {
         closed: false,
-        toggle: false,
+        collapsible: false,
+        rotate: false,
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -33,6 +34,7 @@
 
         this.tabs = [];
         this.state = '';
+        this.rotateInterval = 0;
 
         // Extend the defaults with the passed options
         this.options = $.extend( {}, defaults, options);
@@ -52,6 +54,11 @@
         $(window).bind('resize', function(e) {
             o.setState(e);
         });
+
+        // Start rotate event
+        if(this.options.rotate !== false) {
+            this.startRotation();
+        }
 
         // Events
         this.$element.bind('tabs-activate', function(e) {
@@ -118,8 +125,8 @@
             e.preventDefault();
 
             o.closeTab(e, current);
-            if(o.options.toggle === false || (o.options.toggle && current !== e.data.tab)) {
-                o.openTab(e, e.data.tab);
+            if(o.options.collapsible === false || (o.options.collapsible && current !== e.data.tab)) {
+                o.openTab(e, e.data.tab, false, true);
             }
         };
         
@@ -146,7 +153,16 @@
         }
     };
 
-    ResponsiveTabs.prototype.openTab = function(e, oTab) {
+    ResponsiveTabs.prototype.openTab = function(e, oTab, closeCurrent, stopRotation) {
+
+        if(closeCurrent) {
+            this.closeTab(e, this.getCurrentTab());
+        }
+
+        if(stopRotation && this.rotateInterval > 0) {
+            this.stopRotation();
+        }
+
         oTab.active = true;
         oTab.tab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateActive);
         oTab.panel.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateActive);
@@ -171,11 +187,47 @@
     };
 
     ResponsiveTabs.prototype.getCurrentTab = function() {
+
+        return this.getTab(this.getCurrentTabRef());
+    };
+
+    ResponsiveTabs.prototype.getNextTabRef = function() {
+        var currentTabRef = this.getCurrentTabRef();
+        if(currentTabRef === this.tabs.length - 1) {
+            return 0;
+        } else {
+            return currentTabRef + 1;
+        }
+    };
+
+    ResponsiveTabs.prototype.getPreviousTabRef = function() {
+        var currentTabRef = this.getCurrentTabRef();
+        if(currentTabRef === 0) {
+            return this.tabs.length - 1;
+        } else {
+            return currentTabRef - 1;
+        }
+    };
+
+    ResponsiveTabs.prototype.getCurrentTabRef = function() {
         for (var i=0; i<this.tabs.length; i++) {
             if(this.tabs[i].active) {
-                return this.tabs[i];
+                return i;
             }
         }
+    };
+
+    ResponsiveTabs.prototype.startRotation = function() {
+        var o = this;
+        this.rotateInterval = setInterval(function(){
+            var e = jQuery.Event('rotate');
+            o.openTab(e, o.getTab(o.getNextTabRef()), true);
+        }, ($.isNumeric(o.options.rotate)) ? o.options.rotate : 4000 );
+    };
+
+    ResponsiveTabs.prototype.stopRotation = function() {
+        window.clearInterval(this.rotateInterval);
+        this.rotateInterval = 0;
     };
 
     // Plugin wrapper
