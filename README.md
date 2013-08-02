@@ -64,7 +64,7 @@ This option defines if the first panel on load starts collapsed or not. With the
         startCollapsed: 'tabs' // Start with the panels collapsed if the view is currently tab based
         startCollapsed: 'accordion' // Start with the panels collapsed if the view is currently accordion based
         
-=> Rotate
+### Rotate
 This option can be used to auto rotate the tabs. The tabs will stop rotating when a tab is selected.
 
         rotate: false, // The tabs won't auto rotate
@@ -78,17 +78,17 @@ This callback is called after a tab is selected
 
         activate: function(){},
         
-=> Deactivate
+### Deactivate
 This callback is called after a tab is deactivated
 
         deactivate: function(){},
 
-=> Load
+### Load
 This callback is called after the plugin has been loaded
 
         load: function(){},
         
-=> Activate State
+### Activate State
 This callback is called after the plugin switches from state (Tab view / Accordion view)
 
         activateState: function(){}
@@ -105,4 +105,5 @@ Support
 If you have any questions, feel free to contact me.
 
 Jelle Kralt
+
 jelle@jellekralt.nl
