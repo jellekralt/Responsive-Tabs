@@ -44,7 +44,55 @@ How to use
 => Use this jQuery function to enable responsive tabs on the selected element:
 
     $('#responsiveTabsDemo').responsiveTabs();
+    
+API
+===
+
+The following options are available:
+
+### Collapsible
+If set to 'true' the panels are collapsible. If a tab is active and you select it again, the panel will collapse.
+
+        collapsible: false, // The panels are not collapsible
+        collapsible: true, // The panels are collapsible
+
+### Start collapsed
+This option defines if the first panel on load starts collapsed or not. With the values 'tabs' and 'accordion' you can specify in which view the tabs are supposed to start collapsed.
+
+        startCollapsed: false // Do not collapse on start
+        startCollapsed: true // Start with the panels collapsed
+        startCollapsed: 'tabs' // Start with the panels collapsed if the view is currently tab based
+        startCollapsed: 'accordion' // Start with the panels collapsed if the view is currently accordion based
         
+=> Rotate
+This option can be used to auto rotate the tabs. The tabs will stop rotating when a tab is selected.
+
+        rotate: false, // The tabs won't auto rotate
+        rotate: true, // The tabs will auto rotate from the start
+
+Callbacks
+---------
+
+### Activate
+This callback is called after a tab is selected
+
+        activate: function(){},
+        
+=> Deactivate
+This callback is called after a tab is deactivated
+
+        deactivate: function(){},
+
+=> Load
+This callback is called after the plugin has been loaded
+
+        load: function(){},
+        
+=> Activate State
+This callback is called after the plugin switches from state (Tab view / Accordion view)
+
+        activateState: function(){}
+
 
 Credits
 =========
