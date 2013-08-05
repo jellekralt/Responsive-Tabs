@@ -43,7 +43,9 @@ How to use
     
 => Use this jQuery function to enable responsive tabs on the selected element:
 
-    $('#responsiveTabsDemo').responsiveTabs();
+    $('#responsiveTabsDemo').responsiveTabs({
+        startCollapsed: 'accordion'
+    });
     
 API
 ===
