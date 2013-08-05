@@ -9,8 +9,8 @@
     
     // Defaults
     var defaults = {
-        closed: false,
         collapsible: false,
+        startCollapsed: false,
         rotate: false,
         activate: function(){},
         deactivate: function(){},
@@ -81,15 +81,21 @@
             var tabRef = o.getTabRefBySelector(window.location.hash);
             var firstTab;
 
-            if(tabRef >= 0) {
-                firstTab = o.getTab(tabRef);
-            } else {
-                firstTab = o.getTab(0);
+            o.setState(e); // Set state 
+
+            // Check if the panel should be collaped on load
+            if(o.options.startCollapsed !== true && !(o.options.startCollapsed === 'accordion' && o.state === 'accordion')) {
+
+                if(tabRef >= 0) {
+                    firstTab = o.getTab(tabRef);
+                } else {
+                    firstTab = o.getTab(0);
+                }
+                
+                o.openTab(e, firstTab); // Open first tab
+
+                o.options.load.call(this, e, firstTab); // Call the load callback
             }
-            
-            o.openTab(e, firstTab); // Open first tab
-            o.setState(e); // Set state
-            o.options.load.call(this, e, firstTab); // Call the load callback
         });
         // Trigger loaded event
         this.$element.trigger('tabs-load');
