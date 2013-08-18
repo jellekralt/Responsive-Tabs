@@ -6,11 +6,15 @@
         "responsive",
         "tabs",
         "accordion",
-        "adaptive"
+        "adaptive",
+        "ui",
+        "widget"
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": {
-        "name": "Jelle Kralt"
+        "name": "Jelle Kralt",
+        "email": "jelle@jellekralt.nl",
+        "url": "http://www.jellekralt.nl"
     },
     "maintainers": [
         {

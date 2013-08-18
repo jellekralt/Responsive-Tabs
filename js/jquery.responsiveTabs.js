@@ -12,6 +12,7 @@
         collapsible: false,
         startCollapsed: false,
         rotate: false,
+        setHash: false,
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -177,14 +178,20 @@
         // Define click event on a tab element
         var fClick = function(e) {
             var current = o.getCurrentTab(); // Fetch current tab
+            var clickedTab = e.data.tab;
 
             e.preventDefault();
+
+            // Check if hash has to be set in the URL location
+            if(o.options.setHash) {
+                window.location.hash = clickedTab.selector
+            }
 
             // Close current tab
             o.closeTab(e, current);
             // Only open if the tabs are not collapsible
-            if(o.options.collapsible === false || (o.options.collapsible && current !== e.data.tab)) {
-                o.openTab(e, e.data.tab, false, true);
+            if(o.options.collapsible === false || (o.options.collapsible && current !== clickedTab)) {
+                o.openTab(e, clickedTab, false, true);
             }
         };
         
