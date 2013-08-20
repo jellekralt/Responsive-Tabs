@@ -104,6 +104,8 @@ I am planning on adding these options in the future:
 - Keyboard interaction
 - Selection event type (for instance, mouseover)
 
+If you have good ideas / tips about options / functionality, let me know!
+
 Credits
 =========
 The idea for this plugin is based on 'Easy Responsive Tabs to Accordion' by samsono (github.com/samsono)
