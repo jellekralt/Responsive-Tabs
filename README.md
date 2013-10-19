@@ -95,6 +95,16 @@ This callback is called after the plugin switches from state (Tab view / Accordi
 
         activateState: function(){}
 
+ToDo
+====
+I am planning on adding these options in the future:
+- Transitions
+- Ajax panels
+- Tabs that can be disabled
+- Keyboard interaction
+- Selection event type (for instance, mouseover)
+
+If you have good ideas / tips about options / functionality, let me know!
 
 Credits
 =========

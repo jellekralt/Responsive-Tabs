@@ -6,7 +6,7 @@
  */
 
 ;(function ( $, window, undefined ) {
-    
+
     // Default settings
     var defaults = {
         collapsible: false,
@@ -39,7 +39,7 @@
 
         // Extend the defaults with the passed options
         this.options = $.extend( {}, defaults, options);
-        
+
         this.init();
     }
 
@@ -49,7 +49,7 @@
     **/
     ResponsiveTabs.prototype.init = function () {
         var o = this;
-       
+
         // Load all the elements
         this.tabs = this.loadElements();
         this.loadClasses();
@@ -94,7 +94,7 @@
             var tabRef = o.getTabRefBySelector(window.location.hash);
             var firstTab;
 
-            o.setState(e); // Set state 
+            o.setState(e); // Set state
 
             // Check if the panel should be collaped on load
             if(o.options.startCollapsed !== true && !(o.options.startCollapsed === 'accordion' && o.state === 'accordion')) {
@@ -107,7 +107,7 @@
                     // If not, just get the first one
                     firstTab = o.getTab(0);
                 }
-                
+
                 // Open the initial tab
                 o.openTab(e, firstTab); // Open first tab
 
@@ -125,7 +125,7 @@
      * return: Tab array
     **/
     ResponsiveTabs.prototype.loadElements = function() {
-        var $ul = $('ul', this.$element);
+        var $ul = this.$element.children('ul');
         var tabs = [];
 
         // Add the classes to the basic html elements
@@ -194,7 +194,7 @@
                 o.openTab(e, clickedTab, false, true);
             }
         };
-        
+
         // Loop tabs
         for (var i=0; i<this.tabs.length; i++) {
             // Add click function to the tab and accordion selection element
@@ -386,7 +386,7 @@
                 if (instance instanceof ResponsiveTabs && typeof instance[options] === 'function') {
                     instance[options].apply( instance, Array.prototype.slice.call( args, 1 ) );
                 }
-                                
+
                 // Allow instances to be destroyed via the 'destroy' method
                 if (options === 'destroy') {
                     // TODO: destroy instance classes, etc
