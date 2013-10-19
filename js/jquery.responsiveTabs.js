@@ -136,7 +136,7 @@
         $('li', $ul).each(function() {
             var $tab = $(this);
             var $anchor = $('a', $tab);
-            var panelSelector = $anchor[0].getAttribute('href');
+            var panelSelector = $anchor.attr('href');
             var $panel = $(panelSelector);
             var $accordionTab = $('<div></div>').insertBefore($panel);
             var $accordionAnchor = $('<a></a>').attr('href', panelSelector).html($anchor.html()).appendTo($accordionTab);
@@ -184,7 +184,7 @@
 
             // Check if hash has to be set in the URL location
             if(o.options.setHash) {
-                window.location.hash = clickedTab.selector
+                window.location.hash = clickedTab.selector;
             }
 
             // Close current tab
