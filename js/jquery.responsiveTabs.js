@@ -13,6 +13,8 @@
         startCollapsed: false,
         rotate: false,
         setHash: false,
+        animation: 'default',
+        duration: 500,
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -27,7 +29,6 @@
         }
     };
 
-
     // Plugin constructor
     function ResponsiveTabs(element, options) {
         this.element = element; // Selected DOM element
@@ -36,6 +37,7 @@
         this.tabs = []; // Create tabs array
         this.state = ''; // Define the plugin state (tabs/accordion)
         this.rotateInterval = 0; // Define rotate interval
+        this.$queue = $({});
 
         // Extend the defaults with the passed options
         this.options = $.extend( {}, defaults, options);
@@ -65,11 +67,10 @@
             var tabRef = o.getTabRefBySelector(window.location.hash);
 
             // Check if a tab is found that matches the hash
-            if(tabRef >= 0) {
+            if(tabRef >= 0 && !o.getTab(tabRef)._ignoreHashChange) {
                 // If so, open the tab and auto close the current one
                 o.openTab(e, o.getTab(tabRef), true);
             }
-
         });
 
         // Start rotate event if rotate option is defined
@@ -132,15 +133,17 @@
         this.$element.addClass('r-tabs'); // Tab container
         $ul.addClass('r-tabs-nav'); // List container
 
+
         // Get tab buttons and store their data in an array
         $('li', $ul).each(function() {
             var $tab = $(this);
             var $anchor = $('a', $tab);
-            var panelSelector = $anchor[0].getAttribute('href');
+            var panelSelector = $anchor.attr('href');
             var $panel = $(panelSelector);
             var $accordionTab = $('<div></div>').insertBefore($panel);
             var $accordionAnchor = $('<a></a>').attr('href', panelSelector).html($anchor.html()).appendTo($accordionTab);
             var oTab = {
+                _ignoreHashChange: false,
                 tab: $(this),
                 anchor: $('a', $tab),
                 panel: $panel,
@@ -184,8 +187,10 @@
 
             // Check if hash has to be set in the URL location
             if(o.options.setHash) {
-                window.location.hash = clickedTab.selector
+                window.location.hash = clickedTab.selector;
             }
+
+            e.data.tab._ignoreHashChange = true;
 
             // Close current tab
             o.closeTab(e, current);
@@ -231,20 +236,30 @@
      * This function opens a tab
     **/
     ResponsiveTabs.prototype.openTab = function(e, oTab, closeCurrent, stopRotation) {
+        var o = this;
 
+        // Check if the current tab has to be closed
         if(closeCurrent) {
             this.closeTab(e, this.getCurrentTab());
         }
 
+        // Check if the rotation has to be stopped when activated
         if(stopRotation && this.rotateInterval > 0) {
             this.stopRotation();
         }
 
+        // Set this tab to active
         oTab.active = true;
-        oTab.tab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateActive);
-        oTab.panel.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateActive);
-        oTab.accordionTab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateActive);
+        // Set active classes to the tab button and accordion tab button
+        oTab.tab.removeClass(o.options.classes.stateDefault).addClass(o.options.classes.stateActive);
+        oTab.accordionTab.removeClass(o.options.classes.stateDefault).addClass(o.options.classes.stateActive);
 
+        // Run panel transiton
+        o.doTransition(oTab.panel, o.options.animation, 'open', function() {
+            // When finished, set active class to the panel
+            oTab.panel.removeClass(o.options.classes.stateDefault).addClass(o.options.classes.stateActive);
+        });
+        
         this.$element.trigger('tabs-activate', e, oTab);
     };
 
@@ -253,14 +268,65 @@
      * This function closes a tab
     **/
     ResponsiveTabs.prototype.closeTab = function(e, oTab) {
+        var o = this;
         if(oTab !== undefined) {
+
+            // Deactivate tab
             oTab.active = false;
-            oTab.tab.removeClass(this.options.classes.stateActive).addClass(this.options.classes.stateDefault);
-            oTab.panel.removeClass(this.options.classes.stateActive).addClass(this.options.classes.stateDefault);
-            oTab.accordionTab.removeClass(this.options.classes.stateActive).addClass(this.options.classes.stateDefault);
+            // Set default class to the tab button
+            oTab.tab.removeClass(o.options.classes.stateActive).addClass(o.options.classes.stateDefault);
+            
+            // Run panel transition
+            o.doTransition(oTab.panel, o.options.animation, 'close', function() {
+                // Set default class to the accordion tab button and tab panel
+                oTab.accordionTab.removeClass(o.options.classes.stateActive).addClass(o.options.classes.stateDefault);
+                oTab.panel.removeClass(o.options.classes.stateActive).addClass(o.options.classes.stateDefault);
+            });
 
             this.$element.trigger('tabs-deactivate', e, oTab);
         }
+    };
+
+    /*
+     * doTransition
+     * This function runs an effect on a panel
+    **/
+    ResponsiveTabs.prototype.doTransition = function(panel, method, state, callback) {
+        var effect;
+        var o = this;
+
+        // Get effect based on method
+        switch(method) {
+            case 'slide':
+                effect = (state === 'open') ? 'slideDown' : 'slideUp';
+                break;
+            case 'fade':
+                effect = (state === 'open') ? 'fadeIn' : 'fadeOut';
+                break;
+            default:
+                effect = (state === 'open') ? 'show' : 'hide';
+                break;
+        }
+
+        // Add the transition to a custom queue
+        this.$queue.queue('responsive-tabs',function(next){
+            // Run the transition on the panel
+            panel[effect]({
+                duration: o.options.duration,
+                done: function() {
+                    // Call the callback function
+                    callback.call(panel, method, state);
+                    // Run the next function in the queue
+                    next();
+                }
+            });
+        });
+
+        // When the panel is openend, dequeue everything so the animation starts
+        if(state === 'open') {
+            this.$queue.dequeue('responsive-tabs');
+        }
+
     };
 
     /*
