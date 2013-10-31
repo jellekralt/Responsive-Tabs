@@ -104,7 +104,6 @@ This callback is called after the plugin switches from state (Tab view / Accordi
 ToDo
 ====
 I am planning on adding these options in the future:
-- Transitions
 - Ajax panels
 - Tabs that can be disabled
 - Keyboard interaction
@@ -120,8 +119,4 @@ https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion
 
 Support
 =======
-If you have any questions, feel free to contact me.
-
-Jelle Kralt
-
-jelle@jellekralt.nl
+If you have any questions, problems or suggestions, feel free to submit a ticket!
