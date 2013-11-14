@@ -192,11 +192,15 @@
 
             e.data.tab._ignoreHashChange = true;
 
-            // Close current tab
-            o.closeTab(e, current);
-            // Only open if the tabs are not collapsible
+
+            // Check if tabs collapsible
             if(o.options.collapsible === false || (o.options.collapsible && current !== clickedTab)) {
+                // Tab is not collapsible, close and open
+                o.closeTab(e, current);
                 o.openTab(e, clickedTab, false, true);
+            } else {
+                // Tab is collapsible, just close it
+                o.closeTab(e, current, true);
             }
         };
 
@@ -259,7 +263,7 @@
             // When finished, set active class to the panel
             oTab.panel.removeClass(o.options.classes.stateDefault).addClass(o.options.classes.stateActive);
         });
-        
+
         this.$element.trigger('tabs-activate', e, oTab);
     };
 
@@ -267,21 +271,22 @@
      * closeTab
      * This function closes a tab
     **/
-    ResponsiveTabs.prototype.closeTab = function(e, oTab) {
+    ResponsiveTabs.prototype.closeTab = function(e, oTab, collapsed) {
         var o = this;
+
         if(oTab !== undefined) {
 
             // Deactivate tab
             oTab.active = false;
             // Set default class to the tab button
             oTab.tab.removeClass(o.options.classes.stateActive).addClass(o.options.classes.stateDefault);
-            
+
             // Run panel transition
             o.doTransition(oTab.panel, o.options.animation, 'close', function() {
                 // Set default class to the accordion tab button and tab panel
                 oTab.accordionTab.removeClass(o.options.classes.stateActive).addClass(o.options.classes.stateDefault);
                 oTab.panel.removeClass(o.options.classes.stateActive).addClass(o.options.classes.stateDefault);
-            });
+            }, true);
 
             this.$element.trigger('tabs-deactivate', e, oTab);
         }
@@ -291,9 +296,15 @@
      * doTransition
      * This function runs an effect on a panel
     **/
-    ResponsiveTabs.prototype.doTransition = function(panel, method, state, callback) {
+    ResponsiveTabs.prototype.doTransition = function(panel, method, state, callback, dequeue) {
         var effect;
         var o = this;
+
+        console.log(panel);
+        console.log(method);
+        console.log(state);
+        console.log(callback);
+        console.log(dequeue);
 
         // Get effect based on method
         switch(method) {
@@ -323,7 +334,7 @@
         });
 
         // When the panel is openend, dequeue everything so the animation starts
-        if(state === 'open') {
+        if(state === 'open' || dequeue) {
             this.$queue.dequeue('responsive-tabs');
         }
 
