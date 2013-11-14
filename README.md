@@ -55,8 +55,10 @@ The following options are available:
 ### Collapsible
 If set to 'true' the panels are collapsible. The values 'tabs' and 'accordion' can be used to make the panels collapsible in a specific view/state. If a tab is active and you select it again, the panel will collapse.
 
-        collapsible: false, // The panels are not collapsible
-        collapsible: true, // The panels are collapsible
+        collapsible: false // The panels are not collapsible
+        collapsible: true // The panels are collapsible
+        collapsible: 'tabs' // The panels are only collapsible if the view is currently tab based
+        collapsible: 'accordion' // The panels are only collapsible if the view is currently accordion based
 
 ### Start collapsed
 This option defines if the first panel on load starts collapsed or not. With the values 'tabs' and 'accordion' you can specify in which view the tabs are supposed to start collapsed.
