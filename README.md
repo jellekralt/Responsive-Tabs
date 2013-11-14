@@ -78,7 +78,7 @@ This option can be used to auto rotate the tabs. The tabs will stop rotating whe
 This option enables the animation of the panels. By default the panels will just show and hide, this option can be used to make the panels slide up and down and fade in and out.
 
         animation: 'fade', // The panels will fade in and out
-        rotate: 'slide', // The panels will slide up and down
+        animation: 'slide', // The panels will slide up and down
 
 Callbacks
 ---------
