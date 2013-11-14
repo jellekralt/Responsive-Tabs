@@ -300,12 +300,6 @@
         var effect;
         var o = this;
 
-        console.log(panel);
-        console.log(method);
-        console.log(state);
-        console.log(callback);
-        console.log(dequeue);
-
         // Get effect based on method
         switch(method) {
             case 'slide':
