@@ -9,7 +9,7 @@
 
     // Default settings
     var defaults = {
-        collapsible: false,
+        collapsible: 'accordion',
         startCollapsed: false,
         rotate: false,
         setHash: false,
@@ -192,15 +192,16 @@
 
             e.data.tab._ignoreHashChange = true;
 
-
-            // Check if tabs collapsible
-            if(o.options.collapsible === false || (o.options.collapsible && current !== clickedTab)) {
-                // Tab is not collapsible, close and open
+            // Check if the clicked tab isnt the current one or if its collapsible. If not, do nothing
+            if(current !== clickedTab || o.isCollapisble()) {
+                // The clicked tab is either another tab of the current one. If it's the current tab it is collapsible
+                // Either way, the current tab can be closed
                 o.closeTab(e, current);
-                o.openTab(e, clickedTab, false, true);
-            } else {
-                // Tab is collapsible, just close it
-                o.closeTab(e, current, true);
+
+                // Check if the clicked tab isnt the current one or if it isnt collapsible
+                if(current !== clickedTab || !o.isCollapisble()) {
+                    o.openTab(e, clickedTab, false, true);
+                }
             }
         };
 
@@ -233,6 +234,14 @@
         if(this.state !== oldState) {
             this.$element.trigger('tabs-activate-state', e, {oldState: oldState, newState: this.state});
         }
+    };
+
+    /*
+     * getState
+     * This function gets the current state of the plugin
+    **/
+    ResponsiveTabs.prototype.getState = function(e) {
+        return this.state;
     };
 
     /*
@@ -332,6 +341,15 @@
             this.$queue.dequeue('responsive-tabs');
         }
 
+    };
+
+    /*
+     * isCollapisble
+     * This function returns the collapsibility of the tab in this state
+     * return: Boolean
+    **/
+    ResponsiveTabs.prototype.isCollapisble = function() {
+        return (typeof this.options.collapsible === 'boolean' && this.options.collapsible) || (typeof this.options.collapsible === 'string' && this.options.collapsible === this.getState());
     };
 
     /*

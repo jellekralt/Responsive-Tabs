@@ -29,31 +29,31 @@ How to use
 
 => Use this HTML markup:
 
-    <div id="responsiveTabsDemo">          
+    <div id="responsiveTabsDemo">
         <ul>
             <li><a href="#tab-1"> .... </a></li>
             <li><a href="#tab-2"> .... </a></li>
             <li><a href="#tab-3"> .... </a></li>
-        </ul> 
-                                                
+        </ul>
+
         <div id="tab-1"> ....... </div>
         <div id="tab-2"> ....... </div>
         <div id="tab-3"> ....... </div>
-    </div>    
-    
+    </div>
+
 => Use this jQuery function to enable responsive tabs on the selected element:
 
     $('#responsiveTabsDemo').responsiveTabs({
         startCollapsed: 'accordion'
     });
-    
+
 API
 ===
 
 The following options are available:
 
 ### Collapsible
-If set to 'true' the panels are collapsible. If a tab is active and you select it again, the panel will collapse.
+If set to 'true' the panels are collapsible. The values 'tabs' and 'accordion' can be used to make the panels collapsible in a specific view/state. If a tab is active and you select it again, the panel will collapse.
 
         collapsible: false, // The panels are not collapsible
         collapsible: true, // The panels are collapsible
@@ -65,7 +65,7 @@ This option defines if the first panel on load starts collapsed or not. With the
         startCollapsed: true // Start with the panels collapsed
         startCollapsed: 'tabs' // Start with the panels collapsed if the view is currently tab based
         startCollapsed: 'accordion' // Start with the panels collapsed if the view is currently accordion based
-        
+
 ### Rotate
 This option can be used to auto rotate the tabs. The tabs will stop rotating when a tab is selected.
 
@@ -85,7 +85,7 @@ Callbacks
 This callback is called after a tab is selected
 
         activate: function(){},
-        
+
 ### Deactivate
 This callback is called after a tab is deactivated
 
@@ -95,7 +95,7 @@ This callback is called after a tab is deactivated
 This callback is called after the plugin has been loaded
 
         load: function(){},
-        
+
 ### Activate State
 This callback is called after the plugin switches from state (Tab view / Accordion view)
 
@@ -115,7 +115,7 @@ Credits
 =========
 The idea for this plugin is based on 'Easy Responsive Tabs to Accordion' by samsono (github.com/samsono)
 
-https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion 
+https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion
 
 Support
 =======
