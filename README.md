@@ -47,6 +47,14 @@ How to use
         startCollapsed: 'accordion'
     });
 
+Install
+=======
+
+### npm
+
+    npm install responsive-tabs
+    
+    
 API
 ===
 
