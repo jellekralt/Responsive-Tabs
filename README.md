@@ -54,6 +54,10 @@ Install
 
     npm install responsive-tabs
     
+### Bower
+
+    bower install responsive-tabs
+    
     
 API
 ===
