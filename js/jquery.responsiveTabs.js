@@ -319,6 +319,8 @@
                 break;
             default:
                 effect = (state === 'open') ? 'show' : 'hide';
+                // When default is used, set the duration to 0
+                _this.options.duration = 0;
                 break;
         }
 
