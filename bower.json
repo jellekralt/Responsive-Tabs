@@ -7,6 +7,6 @@
         "**/*.txt"
     ],
     "dependencies": {
-        "jQuery": "1.7.4>"
+        "jQuery": "1.7.2"
     }
 }
