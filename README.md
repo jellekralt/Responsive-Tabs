@@ -134,3 +134,7 @@ https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion
 Support
 =======
 If you have any questions, problems or suggestions, feel free to submit a ticket!
+
+Licence
+=======
+MIT: http://jellekralt.mit-license.org/
