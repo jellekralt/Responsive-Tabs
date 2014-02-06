@@ -80,6 +80,12 @@ This option defines if the first panel on load starts collapsed or not. With the
         startCollapsed: 'tabs' // Start with the panels collapsed if the view is currently tab based
         startCollapsed: 'accordion' // Start with the panels collapsed if the view is currently accordion based
 
+### Active tab
+An 0 based integer that defines the initial opened tab on load.
+
+        active: 1 // Opens the second tab on load
+
+
 ### Rotate
 This option can be used to auto rotate the tabs. The tabs will stop rotating when a tab is selected.
 
