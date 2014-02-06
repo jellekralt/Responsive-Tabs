@@ -9,6 +9,7 @@
 
     // Default settings
     var defaults = {
+        active: null,
         collapsible: 'accordion',
         startCollapsed: false,
         rotate: false,
@@ -104,6 +105,8 @@
                 if(tabRef >= 0) {
                     // If so, set the current tab to the linked tab
                     firstTab = _this.getTab(tabRef);
+                } else if(_this.options.active > 0) {
+                    firstTab = _this.getTab(_this.options.active);
                 } else {
                     // If not, just get the first one
                     firstTab = _this.getTab(0);
