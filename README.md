@@ -141,6 +141,12 @@ Support
 =======
 If you have any questions, problems or suggestions, feel free to submit a ticket!
 
+Buy me a beer!
+==============
+If you enjoy this plugin and like to make a donation you can use the button below :).
+
+[![Gittip](http://img.shields.io/gittip/jellekralt.png)](https://www.gittip.com/jellekralt/)
+
 Licence
 =======
 MIT: http://jellekralt.mit-license.org/
