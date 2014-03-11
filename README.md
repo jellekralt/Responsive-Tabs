@@ -1,4 +1,4 @@
-jQuery Responsive Tabs
+jQuery Responsive Tabs [![Buy me a beer](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jelle%40jellekralt%2enl&lc=NL&item_name=Jelle%20Kralt&item_number=responsive%2dtabs&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 ==============
 
 This jQuery plugin provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.
@@ -145,7 +145,7 @@ Buy me a beer!
 ==============
 If you enjoy this plugin and like to make a donation you can use the button below :).
 
-[![Gittip](http://img.shields.io/gittip/jellekralt.png)](https://www.gittip.com/jellekralt/)
+[![Buy me a beer](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jelle%40jellekralt%2enl&lc=NL&item_name=Jelle%20Kralt&item_number=responsive%2dtabs&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
 Licence
 =======
