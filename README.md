@@ -80,6 +80,12 @@ This option defines if the first panel on load starts collapsed or not. With the
         startCollapsed: 'tabs' // Start with the panels collapsed if the view is currently tab based
         startCollapsed: 'accordion' // Start with the panels collapsed if the view is currently accordion based
 
+### Disabled tabs
+An array with zero based integers that define the tabs that should be disabled
+
+        disabled: [0,2] // Disables the first and third tab
+
+
 ### Active tab
 An 0 based integer that defines the initial opened tab on load.
 
