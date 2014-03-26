@@ -34,6 +34,10 @@ body {
 	border-left: 1px solid #ccc;
 }
 
+.r-tabs .r-tabs-nav .r-tabs-state-disabled {
+	opacity: 0.5;
+}
+
 .r-tabs .r-tabs-nav .r-tabs-state-active .r-tabs-anchor {
 	color: #00aadd;
 	background-color: #fff;

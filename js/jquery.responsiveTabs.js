@@ -10,6 +10,7 @@
     // Default settings
     var defaults = {
         active: null,
+        disabled: [],
         collapsible: 'accordion',
         startCollapsed: false,
         rotate: false,
@@ -23,6 +24,7 @@
         classes: {
             stateDefault: 'r-tabs-state-default',
             stateActive: 'r-tabs-state-active',
+            stateDisabled: 'r-tabs-state-disabled',
             tab: 'r-tabs-tab',
             anchor: 'r-tabs-anchor',
             panel: 'r-tabs-panel',
@@ -66,9 +68,10 @@
         // Hashchange event
         $(window).on('hashchange', function(e) {
             var tabRef = _this.getTabRefBySelector(window.location.hash);
+            var oTab = _this.getTab(tabRef);
 
             // Check if a tab is found that matches the hash
-            if(tabRef >= 0 && !_this.getTab(tabRef)._ignoreHashChange) {
+            if(tabRef >= 0 && !oTab._ignoreHashChange && !oTab.disabled) {
                 // If so, open the tab and auto close the current one
                 _this.openTab(e, _this.getTab(tabRef), true);
             }
@@ -102,10 +105,10 @@
             if(_this.options.startCollapsed !== true && !(_this.options.startCollapsed === 'accordion' && _this.state === 'accordion')) {
 
                 // Check if the page has a hash set that is linked to a tab
-                if(tabRef >= 0) {
+                if(tabRef >= 0 && !_this.getTab(tabRef).disabled) {
                     // If so, set the current tab to the linked tab
                     firstTab = _this.getTab(tabRef);
-                } else if(_this.options.active > 0) {
+                } else if(_this.options.active > 0 && !_this.getTab(_this.options.active).disabled) {
                     firstTab = _this.getTab(_this.options.active);
                 } else {
                     // If not, just get the first one
@@ -129,13 +132,14 @@
      * return: Tab array
     **/
     ResponsiveTabs.prototype.loadElements = function() {
+        var _this = this;
         var $ul = this.$element.children('ul');
         var tabs = [];
+        var id = 0;
 
         // Add the classes to the basic html elements
         this.$element.addClass('r-tabs'); // Tab container
         $ul.addClass('r-tabs-nav'); // List container
-
 
         // Get tab buttons and store their data in an array
         $('li', $ul).each(function() {
@@ -147,6 +151,8 @@
             var $accordionAnchor = $('<a></a>').attr('href', panelSelector).html($anchor.html()).appendTo($accordionTab);
             var oTab = {
                 _ignoreHashChange: false,
+                id: id,
+                disabled: (_this.options.disabled.indexOf(id) != -1),
                 tab: $(this),
                 anchor: $('a', $tab),
                 panel: $panel,
@@ -155,6 +161,8 @@
                 accordionAnchor: $accordionAnchor,
                 active: false
             };
+            // 1up the ID
+            id++;
             // Add to tab array
             tabs.push(oTab);
         });
@@ -172,6 +180,9 @@
             this.tabs[i].panel.addClass(this.options.classes.stateDefault).addClass(this.options.classes.panel);
             this.tabs[i].accordionTab.addClass(this.options.classes.accordionTitle);
             this.tabs[i].accordionAnchor.addClass(this.options.classes.anchor);
+            if(this.tabs[i].disabled) {
+                this.tabs[i].tab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateDisabled);
+            }
         }
     };
 
@@ -188,22 +199,26 @@
 
             e.preventDefault();
 
-            // Check if hash has to be set in the URL location
-            if(_this.options.setHash) {
-                window.location.hash = clickedTab.selector;
-            }
+            // Make sure this tab isn't disabled
+            if(!clickedTab.disabled) {
 
-            e.data.tab._ignoreHashChange = true;
+                // Check if hash has to be set in the URL location
+                if(_this.options.setHash) {
+                    window.location.hash = clickedTab.selector;
+                }
 
-            // Check if the clicked tab isnt the current one or if its collapsible. If not, do nothing
-            if(current !== clickedTab || _this.isCollapisble()) {
-                // The clicked tab is either another tab of the current one. If it's the current tab it is collapsible
-                // Either way, the current tab can be closed
-                _this.closeTab(e, current);
+                e.data.tab._ignoreHashChange = true;
 
-                // Check if the clicked tab isnt the current one or if it isnt collapsible
-                if(current !== clickedTab || !_this.isCollapisble()) {
-                    _this.openTab(e, clickedTab, false, true);
+                // Check if the clicked tab isnt the current one or if its collapsible. If not, do nothing
+                if(current !== clickedTab || _this.isCollapisble()) {
+                    // The clicked tab is either another tab of the current one. If it's the current tab it is collapsible
+                    // Either way, the current tab can be closed
+                    _this.closeTab(e, current);
+
+                    // Check if the clicked tab isnt the current one or if it isnt collapsible
+                    if(current !== clickedTab || !_this.isCollapisble()) {
+                        _this.openTab(e, clickedTab, false, true);
+                    }
                 }
             }
         };
@@ -397,8 +412,10 @@
      * This function returns the next tab's numeric reference
      * return: numeric tab reference
     **/
-    ResponsiveTabs.prototype.getNextTabRef = function() {
-        return (this.getCurrentTabRef() === this.tabs.length - 1) ? 0 : this.getCurrentTabRef() + 1;
+    ResponsiveTabs.prototype.getNextTabRef = function(currentTabRef) {
+        var tabRef = (currentTabRef || this.getCurrentTabRef())
+        var nextTabRef = (tabRef === this.tabs.length - 1) ? 0 : tabRef + 1;
+        return (this.getTab(nextTabRef).disabled) ? this.getNextTabRef(nextTabRef) : nextTabRef;
     };
 
     /*
@@ -411,7 +428,7 @@
     };
 
     /*
-     * getPreviousTabRef
+     * getCurrentTabRef
      * This function returns the current tab's numeric reference
      * return: numeric tab reference
     **/
@@ -433,10 +450,16 @@
     **/
     ResponsiveTabs.prototype.startRotation = function() {
         var _this = this;
-        this.rotateInterval = setInterval(function(){
-            var e = jQuery.Event('rotate');
-            _this.openTab(e, _this.getTab(_this.getNextTabRef()), true);
-        }, ($.isNumeric(_this.options.rotate)) ? _this.options.rotate : 4000 );
+        // Make sure not all tabs are disabled
+        if(this.tabs.length > this.options.disabled.length) {
+            this.rotateInterval = setInterval(function(){
+                var e = jQuery.Event('rotate');
+                var oNextTab = 
+                _this.openTab(e, _this.getTab(_this.getNextTabRef()), true);
+            }, ($.isNumeric(_this.options.rotate)) ? _this.options.rotate : 4000 );
+        } else {
+            throw new Error("Rotation is not possible if all tabs are disabled");
+        }
     };
 
     /*
