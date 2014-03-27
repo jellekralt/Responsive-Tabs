@@ -348,7 +348,7 @@
             // Run the transition on the panel
             panel[effect]({
                 duration: _this.options.duration,
-                done: function() {
+                complete: function() {
                     // Call the callback function
                     callback.call(panel, method, state);
                     // Run the next function in the queue
