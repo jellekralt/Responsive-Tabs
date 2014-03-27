@@ -182,7 +182,8 @@
             this.tabs[i].accordionAnchor.addClass(this.options.classes.anchor);
             if(this.tabs[i].disabled) {
                 this.tabs[i].tab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateDisabled);
-            }
+                this.tabs[i].accordionTab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateDisabled);
+           }
         }
     };
 

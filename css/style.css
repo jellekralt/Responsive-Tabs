@@ -60,6 +60,10 @@ body {
 	margin-bottom: 3px;
 }
 
+.r-tabs .r-tabs-accordion-title.r-tabs-state-disabled {
+	opacity: 0.5;
+}
+
 .r-tabs .r-tabs-accordion-title.r-tabs-state-active .r-tabs-anchor {
 	background-color: #fff;
 	color: #00aadd;
