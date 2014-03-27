@@ -152,7 +152,7 @@
             var oTab = {
                 _ignoreHashChange: false,
                 id: id,
-                disabled: (_this.options.disabled.indexOf(id) != -1),
+                disabled: (_this.options.disabled.indexOf(id) !== -1),
                 tab: $(this),
                 anchor: $('a', $tab),
                 panel: $panel,
@@ -414,7 +414,7 @@
      * return: numeric tab reference
     **/
     ResponsiveTabs.prototype.getNextTabRef = function(currentTabRef) {
-        var tabRef = (currentTabRef || this.getCurrentTabRef())
+        var tabRef = (currentTabRef || this.getCurrentTabRef());
         var nextTabRef = (tabRef === this.tabs.length - 1) ? 0 : tabRef + 1;
         return (this.getTab(nextTabRef).disabled) ? this.getNextTabRef(nextTabRef) : nextTabRef;
     };
@@ -455,7 +455,6 @@
         if(this.tabs.length > this.options.disabled.length) {
             this.rotateInterval = setInterval(function(){
                 var e = jQuery.Event('rotate');
-                var oNextTab = 
                 _this.openTab(e, _this.getTab(_this.getNextTabRef()), true);
             }, ($.isNumeric(_this.options.rotate)) ? _this.options.rotate : 4000 );
         } else {
