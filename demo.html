@@ -39,6 +39,16 @@
 
     </div>
 
+    <p><button id="start-rotation">Start Rotation</button> <button id="stop-rotation">Stop Rotation</button> </p>
+    <p>
+        <button class="select-tab" value="0">1</button> 
+        <button class="select-tab" value="1">2</button> 
+        <button class="select-tab" value="2">3</button> 
+        <button class="select-tab" value="3">4</button> 
+        <button class="select-tab" value="4">5</button> 
+    <p>
+
+
     <!-- jQuery with fallback to the 1.* for old IE -->
     <!--[if lt IE 9]>
         <script src="js/jquery-1.11.0.min.js"></script>
@@ -59,6 +69,20 @@
                 setHash: true,
                 disabled: [3,4]
             });
+
+            $('#start-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('active');
+            });
+            $('#stop-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('stopRotation');
+            });
+            $('#start-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('active');
+            });
+            $('.select-tab').on('click', function() {
+                $('#horizontalTab').responsiveTabs('activate', $(this).val());
+            });
+
         });
     </script>
 </body>
