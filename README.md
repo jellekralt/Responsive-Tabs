@@ -1,4 +1,4 @@
-jQuery Responsive Tabs [![Buy me a beer](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jelle%40jellekralt%2enl&lc=NL&item_name=Jelle%20Kralt&item_number=responsive%2dtabs&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+jQuery Responsive Tabs
 ==============
 
 This jQuery plugin provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.
