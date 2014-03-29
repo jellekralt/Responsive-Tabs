@@ -127,6 +127,22 @@ This callback is called after the plugin switches from state (Tab view / Accordi
 
         activateState: function(){}
 
+Methods
+-------
+
+The following methods are available:
+
+### Activate
+This method activates/opens a tab by using a zero based tab reference
+
+        $('#responsiveTabsDemo').responsiveTabs('activate', 1); // This would open the second tab
+
+### startRotation
+This method start the rotation of the tabs. You can use the first argument to define the speed.
+        
+        $('#responsiveTabsDemo').responsiveTabs('startRotation', 1000); // This would open the second tab
+
+
 ToDo
 ====
 I am planning on adding these options in the future:
