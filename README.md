@@ -29,23 +29,27 @@ How to use
 
 => Use this HTML markup:
 
-    <div id="responsiveTabsDemo">
-        <ul>
-            <li><a href="#tab-1"> .... </a></li>
-            <li><a href="#tab-2"> .... </a></li>
-            <li><a href="#tab-3"> .... </a></li>
-        </ul>
+```html
+<div id="responsiveTabsDemo">
+    <ul>
+        <li><a href="#tab-1"> .... </a></li>
+        <li><a href="#tab-2"> .... </a></li>
+        <li><a href="#tab-3"> .... </a></li>
+    </ul>
 
-        <div id="tab-1"> ....... </div>
-        <div id="tab-2"> ....... </div>
-        <div id="tab-3"> ....... </div>
-    </div>
+    <div id="tab-1"> ....... </div>
+    <div id="tab-2"> ....... </div>
+    <div id="tab-3"> ....... </div>
+</div>
+```
 
 => Use this jQuery function to enable responsive tabs on the selected element:
 
-    $('#responsiveTabsDemo').responsiveTabs({
-        startCollapsed: 'accordion'
-    });
+```javascript
+$('#responsiveTabsDemo').responsiveTabs({
+    startCollapsed: 'accordion'
+});
+```
 
 Install
 =======
@@ -66,43 +70,52 @@ The following options are available:
 
 ### Collapsible
 If set to 'true' the panels are collapsible. The values 'tabs' and 'accordion' can be used to make the panels collapsible in a specific view/state. If a tab is active and you select it again, the panel will collapse.
-
-        collapsible: false // The panels are not collapsible
-        collapsible: true // The panels are collapsible
-        collapsible: 'tabs' // The panels are only collapsible if the view is currently tab based
-        collapsible: 'accordion' // The panels are only collapsible if the view is currently accordion based
+```javascript
+collapsible: false // The panels are not collapsible
+collapsible: true // The panels are collapsible
+collapsible: 'tabs' // The panels are only collapsible if the view is currently tab based
+collapsible: 'accordion' // The panels are only collapsible if the view is currently accordion based
+```
 
 ### Start collapsed
 This option defines if the first panel on load starts collapsed or not. With the values 'tabs' and 'accordion' you can specify in which view the tabs are supposed to start collapsed.
 
-        startCollapsed: false // Do not collapse on start
-        startCollapsed: true // Start with the panels collapsed
-        startCollapsed: 'tabs' // Start with the panels collapsed if the view is currently tab based
-        startCollapsed: 'accordion' // Start with the panels collapsed if the view is currently accordion based
+```javascript
+startCollapsed: false // Do not collapse on start
+startCollapsed: true // Start with the panels collapsed
+startCollapsed: 'tabs' // Start with the panels collapsed if the view is currently tab based
+startCollapsed: 'accordion' // Start with the panels collapsed if the view is currently accordion based
+```
 
 ### Disabled tabs
 An array with zero based integers that define the tabs that should be disabled
 
-        disabled: [0,2] // Disables the first and third tab
-
+```javascript
+disabled: [0,2] // Disables the first and third tab
+```
 
 ### Active tab
 An 0 based integer that defines the initial opened tab on load.
 
-        active: 1 // Opens the second tab on load
-
+```javascript
+active: 1 // Opens the second tab on load
+```
 
 ### Rotate
 This option can be used to auto rotate the tabs. The tabs will stop rotating when a tab is selected.
 
-        rotate: false, // The tabs won't auto rotate
-        rotate: true, // The tabs will auto rotate from the start
+```javascript
+rotate: false, // The tabs won't auto rotate
+rotate: true, // The tabs will auto rotate from the start
+```
 
 ### Animation
 This option enables the animation of the panels. By default the panels will just show and hide, this option can be used to make the panels slide up and down and fade in and out.
 
-        animation: 'fade', // The panels will fade in and out
-        animation: 'slide', // The panels will slide up and down
+```javascript
+animation: 'fade', // The panels will fade in and out
+animation: 'slide', // The panels will slide up and down
+```
 
 Callbacks
 ---------
@@ -110,22 +123,30 @@ Callbacks
 ### Activate
 This callback is called after a tab is selected
 
-        activate: function(){},
+```javascript
+activate: function(){},
+```
 
 ### Deactivate
 This callback is called after a tab is deactivated
 
-        deactivate: function(){},
+```javascript
+deactivate: function(){},
+```
 
 ### Load
 This callback is called after the plugin has been loaded
 
-        load: function(){},
+```javascript
+load: function(){},
+```
 
 ### Activate State
 This callback is called after the plugin switches from state (Tab view / Accordion view)
 
-        activateState: function(){}
+```javascript
+activateState: function(){}
+```
 
 Methods
 -------
@@ -135,13 +156,16 @@ The following methods are available:
 ### Activate
 This method activates/opens a tab by using a zero based tab reference
 
-        $('#responsiveTabsDemo').responsiveTabs('activate', 1); // This would open the second tab
+```javascript
+$('#responsiveTabsDemo').responsiveTabs('activate', 1); // This would open the second tab
+```
 
 ### startRotation
 This method start the rotation of the tabs. You can use the first argument to define the speed.
         
-        $('#responsiveTabsDemo').responsiveTabs('startRotation', 1000); // This would open the second tab
-
+```javascript
+$('#responsiveTabsDemo').responsiveTabs('startRotation', 1000); // This would open the second tab
+```
 
 ToDo
 ====
