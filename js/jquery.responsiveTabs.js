@@ -158,7 +158,7 @@
             var oTab = {
                 _ignoreHashChange: false,
                 id: id,
-                disabled: (_this.options.disabled.indexOf(id) !== -1),
+                disabled: ($.inArray(id, _this.options.disabled) !== -1),
                 tab: $(this),
                 anchor: $('a', $tab),
                 panel: $panel,
