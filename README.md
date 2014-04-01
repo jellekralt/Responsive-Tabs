@@ -15,6 +15,8 @@ Features
 + Tabs can auto rotate
 + Tabs can be collapsed (optional)
 + Tabs can start collapsed based on the view (optional)
++ Tabs can be disabled
++ The tabs are controllable with API methods
 + Cross browser compatibility (IE7+, Chrome, Firefox, Safari and Opera)
 + Multiple device support (Web, Tablet, Mobile, etc)
 
