@@ -49,10 +49,6 @@
         this.init();
     }
 
-    //
-    // PRIVATE FUNCTIONS
-    //
-
 
     /*
      * init
@@ -131,6 +127,10 @@
         // Trigger loaded event
         this.$element.trigger('tabs-load');
     };
+    
+    //
+    // PRIVATE FUNCTIONS
+    //
 
     /*
      * loadElements
