@@ -8,7 +8,7 @@
 
 ;(function ( $, window, undefined ) {
 
-    // Default settings
+    /** Default settings */
     var defaults = {
         active: null,
         disabled: [],
@@ -33,7 +33,12 @@
         }
     };
 
-    // Plugin constructor
+    /**
+     * Responsive Tabs
+     * @constructor
+     * @param {object} element - The HTML element the validator should be bound to
+     * @param {object} options - An option map
+     */
     function ResponsiveTabs(element, options) {
         this.element = element; // Selected DOM element
         this.$element = $(element); // Selected jQuery element
@@ -50,10 +55,9 @@
     }
 
 
-    /*
-     * init
-     * This function is called when the plugin loads
-    **/
+    /**
+     * This function initializes the tab plugin
+     */
     ResponsiveTabs.prototype.init = function () {
         var _this = this;
 
@@ -132,11 +136,10 @@
     // PRIVATE FUNCTIONS
     //
 
-    /*
-     * loadElements
+    /**
      * This function loads the tab elements and stores them in an array
-     * return: Tab array
-    **/
+     * @returns {Array} Array of tab elements
+     */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
         var $ul = this.$element.children('ul');
@@ -175,10 +178,10 @@
         return tabs;
     };
 
-    /*
-     * loadClasses
+
+    /**
      * This function adds classes to the tab elements based on the options
-    **/
+     */
     ResponsiveTabs.prototype._loadClasses = function() {
         for (var i=0; i<this.tabs.length; i++) {
             this.tabs[i].tab.addClass(this.options.classes.stateDefault).addClass(this.options.classes.tab);
@@ -193,10 +196,9 @@
         }
     };
 
-    /*
-     * loadEvents
+    /**
      * This function adds events to the tab elements
-    **/
+     */
     ResponsiveTabs.prototype._loadEvents = function() {
         var _this = this;
         // Define click event on a tab element
@@ -238,10 +240,10 @@
         }
     };
 
-    /*
-     * setState
+    /**
      * This function sets the current state of the plugin
-    **/
+     * @param {Event} e - The event that triggers the state change
+     */
     ResponsiveTabs.prototype._setState = function(e) {
         var $ul = $('ul', this.$element);
         var oldState = this.state;
@@ -261,10 +263,13 @@
         }
     };
 
-    /*
-     * openTab
+    /**
      * This function opens a tab
-    **/
+     * @param {Event} e - The event that triggers the tab opening
+     * @param {Object} oTab - The tab object that should be opened
+     * @param {Boolean} closeCurrent - Defines if the current tab should be closed
+     * @param {Boolean} stopRotation - Defines if the tab rotation loop should be stopped
+     */
     ResponsiveTabs.prototype._openTab = function(e, oTab, closeCurrent, stopRotation) {
         var _this = this;
 
@@ -293,10 +298,11 @@
         this.$element.trigger('tabs-activate', e, oTab);
     };
 
-    /*
-     * closeTab
+    /**
      * This function closes a tab
-    **/
+     * @param {Event} e - The event that is triggered when a tab is closed
+     * @param {Object} oTab - The tab object that should be closed
+     */
     ResponsiveTabs.prototype._closeTab = function(e, oTab) {
         var _this = this;
 
@@ -318,10 +324,14 @@
         }
     };
 
-    /*
-     * _doTransition
+    /**
      * This function runs an effect on a panel
-    **/
+     * @param {Element} panel - The HTML element of the tab panel
+     * @param {String} method - The transition method reference
+     * @param {String} state - The state (open/closed) that the panel should transition to
+     * @param {Function} callback - The callback function that is called after the transition
+     * @param {Boolean} dequeue - Defines if the event queue should be dequeued after the transition
+     */
     ResponsiveTabs.prototype._doTransition = function(panel, method, state, callback, dequeue) {
         var effect;
         var _this = this;
@@ -362,29 +372,28 @@
 
     };
 
-    /*
-     * _isCollapisble
+    /**
      * This function returns the collapsibility of the tab in this state
-     * return: Boolean
-    **/
+     * @returns {Boolean} The collapsibility of the tab
+     */
     ResponsiveTabs.prototype._isCollapisble = function() {
         return (typeof this.options.collapsible === 'boolean' && this.options.collapsible) || (typeof this.options.collapsible === 'string' && this.options.collapsible === this.getState());
     };
 
-    /*
-     * getTab
+    /**
      * This function returns a tab by numeric reference
-     * return: tab element
-    **/
+     * @param {Integer} numRef - Numeric tab reference
+     * @returns {Object} Tab object
+     */
     ResponsiveTabs.prototype._getTab = function(numRef) {
         return this.tabs[numRef];
     };
 
-     /*
-     * getTabRefBySelector
+    /**
      * This function returns the numeric tab reference based on a hash selector
-     * return: numeric tab reference
-    **/
+     * @param {String} selector - Hash selector
+     * @returns {Integer} Numeric tab reference
+     */
     ResponsiveTabs.prototype._getTabRefBySelector = function(selector) {
         // Loop all tabs
         for (var i=0; i<this.tabs.length; i++) {
@@ -397,40 +406,37 @@
         return -1;
     };
 
-    /*
-     * _getCurrentTab
+    /**
      * This function returns the current tab element
-     * return: current tab element
-    **/
+     * @returns {Object} Current tab element
+     */
     ResponsiveTabs.prototype._getCurrentTab = function() {
         return this._getTab(this._getCurrentTabRef());
     };
 
-    /*
-     * getNextTabRef
+    /**
      * This function returns the next tab's numeric reference
-     * return: numeric tab reference
-    **/
+     * @param {Integer} currentTabRef - Current numeric tab reference
+     * @returns {Integer} Numeric tab reference
+     */
     ResponsiveTabs.prototype._getNextTabRef = function(currentTabRef) {
         var tabRef = (currentTabRef || this._getCurrentTabRef());
         var nextTabRef = (tabRef === this.tabs.length - 1) ? 0 : tabRef + 1;
         return (this._getTab(nextTabRef).disabled) ? this._getNextTabRef(nextTabRef) : nextTabRef;
     };
 
-    /*
-     * getPreviousTabRef
+    /**
      * This function returns the previous tab's numeric reference
-     * return: numeric tab reference
-    **/
+     * @returns {Integer} Numeric tab reference
+     */
     ResponsiveTabs.prototype._getPreviousTabRef = function() {
         return (this._getCurrentTabRef() === 0) ? this.tabs.length - 1 : this._getCurrentTabRef() - 1;
     };
 
-    /*
-     * _getCurrentTabRef
+    /**
      * This function returns the current tab's numeric reference
-     * return: numeric tab reference
-    **/
+     * @returns {Integer} Numeric tab reference
+     */
     ResponsiveTabs.prototype._getCurrentTabRef = function() {
         // Loop all tabs
         for (var i=0; i<this.tabs.length; i++) {
@@ -443,15 +449,15 @@
         return -1;
     };
 
-
     //
     // PUBLIC FUNCTIONS
     //
 
-    /*
-     * activate
-     * This function gets the current state of the plugin
-    **/
+    /**
+     * This function activates a tab
+     * @param {Integer} tabRef - Numeric tab reference
+     * @param {Boolean} stopRotation - Defines if the tab rotation should stop after activation
+     */
     ResponsiveTabs.prototype.activate = function(tabRef, stopRotation) {
         var e = jQuery.Event('tabs-activate');
         var oTab = this._getTab(tabRef);
@@ -461,18 +467,18 @@
     };
 
 
-    /*
-     * getState
+    /**
      * This function gets the current state of the plugin
-    **/
+     * @returns {String} State of the plugin
+     */
     ResponsiveTabs.prototype.getState = function() {
         return this.state;
     };
 
-     /*
-     * startRotation
+    /**
      * This function starts the rotation of the tabs
-    **/
+     * @param {Integer} speed - The speed of the rotation
+     */
     ResponsiveTabs.prototype.startRotation = function(speed) {
         var _this = this;
         // Make sure not all tabs are disabled
@@ -486,16 +492,15 @@
         }
     };
 
-    /*
-     * stopRotation
+    /**
      * This function stops the rotation of the tabs
-    **/
+     */
     ResponsiveTabs.prototype.stopRotation = function() {
         window.clearInterval(this.rotateInterval);
         this.rotateInterval = 0;
     };
 
-    // Plugin wrapper
+    /** jQuery wrapper */
     $.fn.responsiveTabs = function ( options ) {
         var args = arguments;
         if (options === undefined || typeof options === 'object') {
