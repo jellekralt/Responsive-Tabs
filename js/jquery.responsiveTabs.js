@@ -170,14 +170,13 @@
                 accordionAnchor: $accordionAnchor,
                 active: false
             };
-            
-			if(!$(this).hasClass('exclude'))
-			{
+            if(!$(this).hasClass('exclude'))
+            {
                 // 1up the ID
                 id++;
                 // Add to tab array
                 tabs.push(oTab);
-			}
+            }
         });
         return tabs;
     };
