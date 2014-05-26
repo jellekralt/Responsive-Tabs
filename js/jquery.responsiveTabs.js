@@ -151,27 +151,27 @@
         $ul.addClass('r-tabs-nav'); // List container
 
         // Get tab buttons and store their data in an array
-        $('li', $ul).each(function() {
-            var $tab = $(this);
-            var $anchor = $('a', $tab);
-            var panelSelector = $anchor.attr('href');
-            var $panel = $(panelSelector);
-            var $accordionTab = $('<div></div>').insertBefore($panel);
-            var $accordionAnchor = $('<a></a>').attr('href', panelSelector).html($anchor.html()).appendTo($accordionTab);
-            var oTab = {
-                _ignoreHashChange: false,
-                id: id,
-                disabled: ($.inArray(id, _this.options.disabled) !== -1),
-                tab: $(this),
-                anchor: $('a', $tab),
-                panel: $panel,
-                selector: panelSelector,
-                accordionTab: $accordionTab,
-                accordionAnchor: $accordionAnchor,
-                active: false
-            };
+        $('li', $ul).each(function() {		
             if(!$(this).hasClass('exclude'))
             {
+				var $tab = $(this);
+				var $anchor = $('a', $tab);
+				var panelSelector = $anchor.attr('href');
+				var $panel = $(panelSelector);
+				var $accordionTab = $('<div></div>').insertBefore($panel);
+				var $accordionAnchor = $('<a></a>').attr('href', panelSelector).html($anchor.html()).appendTo($accordionTab);
+				var oTab = {
+					_ignoreHashChange: false,
+					id: id,
+					disabled: ($.inArray(id, _this.options.disabled) !== -1),
+					tab: $(this),
+					anchor: $('a', $tab),
+					panel: $panel,
+					selector: panelSelector,
+					accordionTab: $accordionTab,
+					accordionAnchor: $accordionAnchor,
+					active: false
+				};
                 // 1up the ID
                 id++;
                 // Add to tab array
