@@ -2,7 +2,7 @@
  *  Project: jquery.responsiveTabs.js
  *  Description: A plugin that creates responsive tabs, optimized for all devices
  *  Author: Jelle Kralt (jelle@jellekralt.nl)
- *  Version: 1.3.3
+ *  Version: 1.3.4
  *  License: MIT
  */
 
@@ -156,7 +156,7 @@
             var $tab = $(this);
             var isExcluded = $tab.hasClass(_this.options.classes.stateExcluded);
             var $anchor, $panel, $accordionTab, $accordionAnchor;
-            
+
             // Check if the tab should be excluded
             if(!isExcluded) {
 
