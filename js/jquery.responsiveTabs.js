@@ -155,7 +155,7 @@
         $('li', $ul).each(function() {
             var $tab = $(this);
             var isExcluded = $tab.hasClass(_this.options.classes.stateExcluded);
-            var $anchor, $panel, $accordionTab, $accordionAnchor;
+            var $anchor, $panel, $accordionTab, $accordionAnchor, panelSelector;
 
             // Check if the tab should be excluded
             if(!isExcluded) {
