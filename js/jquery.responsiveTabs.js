@@ -98,8 +98,8 @@
             _this.options.activate.call(this, e, oTab);
         });
         // Deactivate: this event is called when a tab is closed
-        this.$element.bind('tabs-deactivate', function(e) {
-            _this.options.deactivate.call(this, e);
+        this.$element.bind('tabs-deactivate', function(e, oTab) {
+            _this.options.deactivate.call(this, e, oTab);
         });
         // Load: this event is called when the plugin has been loaded
         this.$element.bind('tabs-load', function(e) {
@@ -330,7 +330,7 @@
                 oTab.panel.removeClass(_this.options.classes.stateActive).addClass(_this.options.classes.stateDefault);
             }, true);
 
-            this.$element.trigger('tabs-deactivate', e, oTab);
+            this.$element.trigger('tabs-deactivate', oTab);
         }
     };
 
