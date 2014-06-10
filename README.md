@@ -125,22 +125,34 @@ Callbacks
 ### Activate
 This callback is called after a tab is selected
 
+**Arguments**
+- event: Activate event
+- tab: Activated tab object
+
 ```javascript
-activate: function(){},
+activate: function(event, tab){},
 ```
 
 ### Deactivate
 This callback is called after a tab is deactivated
 
+**Arguments**
+- event: Deactivate event
+- tab: Deactivated tab object
+
 ```javascript
-deactivate: function(){},
+deactivate: function(event, tab){},
 ```
 
 ### Load
 This callback is called after the plugin has been loaded
 
+**Arguments**
+- event: Load event
+- tab: First tab object
+
 ```javascript
-load: function(){},
+load: function(event, firstTab){},
 ```
 
 ### Activate State
