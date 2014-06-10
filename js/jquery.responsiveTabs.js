@@ -94,8 +94,8 @@
         //
 
         // Activate: this event is called when a tab is selected
-        this.$element.bind('tabs-activate', function(e) {
-            _this.options.activate.call(this, e);
+        this.$element.bind('tabs-activate', function(e, oTab) {
+            _this.options.activate.call(this, e, oTab);
         });
         // Deactivate: this event is called when a tab is closed
         this.$element.bind('tabs-deactivate', function(e) {
@@ -305,7 +305,7 @@
             oTab.panel.removeClass(_this.options.classes.stateDefault).addClass(_this.options.classes.stateActive);
         });
 
-        this.$element.trigger('tabs-activate', e, oTab);
+        this.$element.trigger('tabs-activate', oTab);
     };
 
     /**

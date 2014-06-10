@@ -48,6 +48,8 @@
         <button class="select-tab" value="4">5</button> 
     <p>
 
+    <p class="info"></p>
+
 
     <!-- jQuery with fallback to the 1.* for old IE -->
     <!--[if lt IE 9]>
@@ -67,7 +69,10 @@
                 startCollapsed: 'accordion',
                 collapsible: 'accordion',
                 setHash: true,
-                disabled: [3,4]
+                disabled: [3,4],
+                activate: function(e, tab) {
+                    $('.info').html('Tab <strong>' + tab.id + '</strong> activated!');
+                }
             });
 
             $('#start-rotation').on('click', function() {
