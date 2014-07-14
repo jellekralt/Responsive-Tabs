@@ -259,7 +259,7 @@
      * This function sets the current state of the plugin
      * @param {Event} e - The event that triggers the state change
      */
-    ResponsiveTabs.prototype._setState = function(e) {
+    ResponsiveTabs.prototype._setState = function() {
         var $ul = $('ul', this.$element);
         var oldState = this.state;
 
