@@ -101,6 +101,11 @@
         this.$element.bind('tabs-deactivate', function(e, oTab) {
             _this.options.deactivate.call(this, e, oTab);
         });
+        // Activate State: this event is called when the plugin switches states
+        this.$element.bind('tabs-activate-state', function(e, state) {
+            _this.options.activateState.call(this, e, state);
+        });
+
         // Load: this event is called when the plugin has been loaded
         this.$element.bind('tabs-load', function(e) {
             var tabRef = _this._getTabRefBySelector(window.location.hash);
@@ -269,7 +274,7 @@
 
         // If the new state is different from the old state, the state activate trigger must be called
         if(this.state !== oldState) {
-            this.$element.trigger('tabs-activate-state', e, {oldState: oldState, newState: this.state});
+            this.$element.trigger('tabs-activate-state', {oldState: oldState, newState: this.state});
         }
     };
 
