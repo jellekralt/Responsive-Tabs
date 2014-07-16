@@ -185,7 +185,6 @@ ToDo
 ====
 I am planning on adding these options in the future:
 - Ajax panels
-- Tabs that can be disabled
 - Keyboard interaction
 - Selection event type (for instance, mouseover)
 
