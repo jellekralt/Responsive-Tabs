@@ -181,6 +181,40 @@ This method start the rotation of the tabs. You can use the first argument to de
 $('#responsiveTabsDemo').responsiveTabs('startRotation', 1000); // This would open the second tab
 ```
 
+Events
+-------
+The following events are emitted on the element the tabs are initialised on (the container):
+
+### tabs-load
+This event is triggered when the tabs plugin has finished loading
+
+**Passed variables**
+- event
+
+### tabs-activate 
+This event is triggered when a tab is activated
+
+**Passed variables**
+- event
+- Activated tab object
+
+### tabs-deactivate 
+This event is triggered when a tab is deactivated
+
+**Passed variables**
+- event
+- Deactivated tab object
+
+### tabs-activate-state 
+This event is triggered when the state of the plugin changes
+
+**Passed variables**
+- event
+- State object
+    - Old state
+    - New state
+
+
 ToDo
 ====
 I am planning on adding these options in the future:
@@ -199,6 +233,7 @@ https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion
 Support
 =======
 If you have any questions, problems or suggestions, feel free to submit a ticket!
+Also, pull requests with improvements, new features or other great stuff are always very welcome.
 
 Buy me a beer!
 ==============
