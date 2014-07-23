@@ -481,6 +481,17 @@
         }
     };
 
+    /**
+     * This function deactivates a tab
+     * @param {Integer} tabRef - Numeric tab reference
+     */
+    ResponsiveTabs.prototype.deactivate = function(tabRef) {
+        var e = jQuery.Event('tabs-dectivate');
+        var oTab = this._getTab(tabRef);
+        if(!oTab.disabled) {
+            this._closeTab(e, oTab);
+        }
+    };
 
     /**
      * This function gets the current state of the plugin
