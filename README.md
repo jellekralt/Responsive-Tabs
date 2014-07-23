@@ -174,6 +174,13 @@ This method activates/opens a tab by using a zero based tab reference
 $('#responsiveTabsDemo').responsiveTabs('activate', 1); // This would open the second tab
 ```
 
+### Deactivate
+This method deactivates/closes a tab by using a zero based tab reference
+
+```javascript
+$('#responsiveTabsDemo').responsiveTabs('deactivate', 1); // This would close the second tab
+```
+
 ### startRotation
 This method start the rotation of the tabs. You can use the first argument to define the speed.
         
