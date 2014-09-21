@@ -103,6 +103,13 @@ An 0 based integer that defines the initial opened tab on load.
 active: 1 // Opens the second tab on load
 ```
 
+### Set hash
+A boolean that can be used to enable and disable the setting of a reference to the selected tab in the URL hash. If set to 'true', the selecting of a new tab will set the reference to that tab in the URL hash.
+
+```javascript
+setHash: true
+```
+
 ### Rotate
 This option can be used to auto rotate the tabs. The tabs will stop rotating when a tab is selected.
 
