@@ -108,30 +108,20 @@
 
         // Load: this event is called when the plugin has been loaded
         this.$element.bind('tabs-load', function(e) {
-            var tabRef = _this._getTabRefBySelector(window.location.hash);
-            var firstTab;
+            var startTab;
 
             _this._setState(e); // Set state
 
             // Check if the panel should be collaped on load
             if(_this.options.startCollapsed !== true && !(_this.options.startCollapsed === 'accordion' && _this.state === 'accordion')) {
 
-                // Check if the page has a hash set that is linked to a tab
-                if(tabRef >= 0 && !_this._getTab(tabRef).disabled) {
-                    // If so, set the current tab to the linked tab
-                    firstTab = _this._getTab(tabRef);
-                } else if(_this.options.active > 0 && !_this._getTab(_this.options.active).disabled) {
-                    firstTab = _this._getTab(_this.options.active);
-                } else {
-                    // If not, just get the first one
-                    firstTab = _this._getTab(0);
-                }
+                startTab = _this._getStartTab();
 
                 // Open the initial tab
-                _this._openTab(e, firstTab); // Open first tab
+                _this._openTab(e, startTab); // Open first tab
 
                 // Call the callback function
-                _this.options.load.call(this, e, firstTab); // Call the load callback
+                _this.options.load.call(this, e, startTab); // Call the load callback
             }
         });
         // Trigger loaded event
@@ -256,12 +246,36 @@
     };
 
     /**
+     * This function gets the tab that should be opened at start
+     * @returns {Object} Tab object
+     */
+    ResponsiveTabs.prototype._getStartTab = function() {
+        var tabRef = this._getTabRefBySelector(window.location.hash);
+        var startTab;
+        
+        // Check if the page has a hash set that is linked to a tab
+        if(tabRef >= 0 && !this._getTab(tabRef).disabled) {
+            // If so, set the current tab to the linked tab
+            startTab = this._getTab(tabRef);
+        } else if(this.options.active > 0 && !this._getTab(this.options.active).disabled) {
+            startTab = this._getTab(this.options.active);
+        } else {
+            // If not, just get the first one
+            startTab = this._getTab(0);
+        }
+
+        return startTab;
+    };
+
+    /**
      * This function sets the current state of the plugin
      * @param {Event} e - The event that triggers the state change
      */
-    ResponsiveTabs.prototype._setState = function() {
+    ResponsiveTabs.prototype._setState = function(e) {
         var $ul = $('ul', this.$element);
         var oldState = this.state;
+        var startCollapsedIsState = (typeof this.options.startCollapsed === 'string');
+        var startTab;
 
         // The state is based on the visibility of the tabs list
         if($ul.is(':visible')){
@@ -272,9 +286,20 @@
             this.state = 'accordion';
         }
 
-        // If the new state is different from the old state, the state activate trigger must be called
+        // If the new state is different from the old state
         if(this.state !== oldState) {
+            // If so, the state activate trigger must be called
             this.$element.trigger('tabs-activate-state', {oldState: oldState, newState: this.state});
+
+            // Check if the state switch should open a tab
+            if(oldState && startCollapsedIsState && this.options.startCollapsed !== this.state && this._getCurrentTab() === undefined) {
+                // Get initial tab
+                startTab = this._getStartTab(e);
+                // Open the initial tab
+                this._openTab(e, startTab); // Open first tab
+            }
+
+
         }
     };
 
