@@ -11,6 +11,7 @@
     /** Default settings */
     var defaults = {
         active: null,
+        event: 'click',
         disabled: [],
         collapsible: 'accordion',
         startCollapsed: false,
@@ -206,32 +207,33 @@
      */
     ResponsiveTabs.prototype._loadEvents = function() {
         var _this = this;
-        // Define click event on a tab element
-        var fClick = function(e) {
+
+        // Define activate event on a tab element
+        var fActivate = function(e) {
             var current = _this._getCurrentTab(); // Fetch current tab
-            var clickedTab = e.data.tab;
+            var activatedTab = e.data.tab;
 
             e.preventDefault();
 
             // Make sure this tab isn't disabled
-            if(!clickedTab.disabled) {
+            if(!activatedTab.disabled) {
 
                 // Check if hash has to be set in the URL location
                 if(_this.options.setHash) {
-                    window.location.hash = clickedTab.selector;
+                    window.location.hash = activatedTab.selector;
                 }
 
                 e.data.tab._ignoreHashChange = true;
 
-                // Check if the clicked tab isnt the current one or if its collapsible. If not, do nothing
-                if(current !== clickedTab || _this._isCollapisble()) {
-                    // The clicked tab is either another tab of the current one. If it's the current tab it is collapsible
+                // Check if the activated tab isnt the current one or if its collapsible. If not, do nothing
+                if(current !== activatedTab || _this._isCollapisble()) {
+                    // The activated tab is either another tab of the current one. If it's the current tab it is collapsible
                     // Either way, the current tab can be closed
                     _this._closeTab(e, current);
 
-                    // Check if the clicked tab isnt the current one or if it isnt collapsible
-                    if(current !== clickedTab || !_this._isCollapisble()) {
-                        _this._openTab(e, clickedTab, false, true);
+                    // Check if the activated tab isnt the current one or if it isnt collapsible
+                    if(current !== activatedTab || !_this._isCollapisble()) {
+                        _this._openTab(e, activatedTab, false, true);
                     }
                 }
             }
@@ -239,9 +241,9 @@
 
         // Loop tabs
         for (var i=0; i<this.tabs.length; i++) {
-            // Add click function to the tab and accordion selection element
-            this.tabs[i].anchor.on('click', {tab: _this.tabs[i]}, fClick);
-            this.tabs[i].accordionAnchor.on('click', {tab: _this.tabs[i]}, fClick);
+            // Add activate function to the tab and accordion selection element
+            this.tabs[i].anchor.on(_this.options.event, {tab: _this.tabs[i]}, fActivate);
+            this.tabs[i].accordionAnchor.on(_this.options.event, {tab: _this.tabs[i]}, fActivate);
         }
     };
 
