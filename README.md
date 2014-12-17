@@ -118,6 +118,15 @@ rotate: false, // The tabs won't auto rotate
 rotate: true, // The tabs will auto rotate from the start
 ```
 
+### Event
+This option can be used to specify the event that activates a tab. For instance: 'mouseover'. Defaults to 'click'
+
+```javascript
+event: 'click' // (default) The tabs will activate on click
+event: 'mouseover' // The tabs will activate on mouseover
+etc...
+```
+
 ### Animation
 This option enables the animation of the panels. By default the panels will just show and hide, this option can be used to make the panels slide up and down and fade in and out.
 
@@ -234,7 +243,6 @@ ToDo
 I am planning on adding these options in the future:
 - Ajax panels
 - Keyboard interaction
-- Selection event type (for instance, mouseover)
 
 If you have good ideas / tips about options / functionality, let me know!
 
