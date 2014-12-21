@@ -19,6 +19,7 @@
         setHash: false,
         animation: 'default',
         duration: 500,
+        scrollToAccordion: false,
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -337,6 +338,21 @@
             oTab.panel.removeClass(_this.options.classes.stateDefault).addClass(_this.options.classes.stateActive);
         });
 
+        // And if enabled and state is accordion, scroll to the accordion tab
+        if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && !_this._isInView(oTab.accordionTab)) {
+            // Check if the option is a number
+            if(Number(_this.options.scrollToAccordion) === _this.options.scrollToAccordion && _this.options.scrollToAccordion % 1 === 0) {
+                // If so, set scrollTop with animate (and set the speed to the option value)
+                $('html, body').animate({
+                    scrollTop: oTab.accordionTab.offset().top
+                }, _this.options.scrollToAccordion);
+            } else {
+                //  If not, just set scrollTop
+                $('html, body').scrollTop(oTab.accordionTab.offset().top);
+            }
+
+        }
+
         this.$element.trigger('tabs-activate', oTab);
     };
 
@@ -489,6 +505,18 @@
         }
         // No tabs have been found, return negative index
         return -1;
+    };
+
+    //
+    // HELPER FUNCTIONS
+    // 
+
+    ResponsiveTabs.prototype._isInView = function($element) {
+        var docViewTop = $(window).scrollTop(),
+            docViewBottom = docViewTop + $(window).height(),
+            elemTop = $element.offset().top,
+            elemBottom = elemTop + $element.height();
+        return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
     };
 
     //
