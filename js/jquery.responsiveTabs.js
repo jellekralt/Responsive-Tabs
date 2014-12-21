@@ -336,22 +336,23 @@
         _this._doTransition(oTab.panel, _this.options.animation, 'open', function() {
             // When finished, set active class to the panel
             oTab.panel.removeClass(_this.options.classes.stateDefault).addClass(_this.options.classes.stateActive);
+          
+           // And if enabled and state is accordion, scroll to the accordion tab
+            if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && (!_this._isInView(oTab.accordionTab) || _this.options.animation !== 'default')) {
+                // Check if the animation option is enabled, and if the duration isn't 0
+                if(_this.options.animation !== 'default' && _this.options.duration > 0) {
+                    // If so, set scrollTop with animate and use the 'animation' duration
+                    $('html, body').animate({
+                        scrollTop: oTab.accordionTab.offset().top
+                    }, _this.options.duration);
+                } else {
+                    //  If not, just set scrollTop
+                    $('html, body').scrollTop(oTab.accordionTab.offset().top);
+                }
+            }
         });
 
-        // And if enabled and state is accordion, scroll to the accordion tab
-        if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && !_this._isInView(oTab.accordionTab)) {
-            // Check if the option is a number
-            if(Number(_this.options.scrollToAccordion) === _this.options.scrollToAccordion && _this.options.scrollToAccordion % 1 === 0) {
-                // If so, set scrollTop with animate (and set the speed to the option value)
-                $('html, body').animate({
-                    scrollTop: oTab.accordionTab.offset().top
-                }, _this.options.scrollToAccordion);
-            } else {
-                //  If not, just set scrollTop
-                $('html, body').scrollTop(oTab.accordionTab.offset().top);
-            }
 
-        }
 
         this.$element.trigger('tabs-activate', oTab);
     };
