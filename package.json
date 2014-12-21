@@ -15,6 +15,7 @@
         "url": "https://github.com/jellekralt/Responsive-Tabs.git"
     },
     "keywords": [
+        "jquery-plugin",
         "responsive",
         "tabs",
         "jquery"
