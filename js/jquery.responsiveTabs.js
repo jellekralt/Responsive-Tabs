@@ -221,7 +221,17 @@
 
                 // Check if hash has to be set in the URL location
                 if(_this.options.setHash) {
-                    window.location.hash = activatedTab.selector;
+                    // Set the hash using the history api if available to tackle Chromes repaint bug on hash change
+                    if(history.pushState)   {
+                        
+                        history.pushState(null, null, activatedTab.selector);
+                        
+                    } else {
+                        
+                        // Otherwise fallback to the hash update for sites that don't support the history api
+                        window.location.hash = activatedTab.selector;
+                        
+                    }                
                 }
 
                 e.data.tab._ignoreHashChange = true;
