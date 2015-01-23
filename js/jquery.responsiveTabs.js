@@ -20,6 +20,7 @@
         animation: 'default',
         duration: 500,
         scrollToAccordion: false,
+        nav: '> ul',
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -35,6 +36,20 @@
             accordionTitle: 'r-tabs-accordion-title'
         }
     };
+
+    function filterDataAttrs(el) {
+        var data = $(el).data(),
+            prefix = 'rTabs',
+            result = {},
+            key;
+        for(key in data) {
+            if(data.hasOwnProperty(key) && key.indexOf(prefix) === 0) {
+              result[key.charAt(prefix.length).toLowerCase() + key.slice(prefix.length + 1)] = data[key];
+            }
+        }
+
+        return result;
+    }
 
     /**
      * Responsive Tabs
@@ -52,7 +67,7 @@
         this.$queue = $({});
 
         // Extend the defaults with the passed options
-        this.options = $.extend( {}, defaults, options);
+        this.options = $.extend( {}, defaults, options, filterDataAttrs(element));
 
         this.init();
     }
@@ -140,7 +155,7 @@
      */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
-        var $ul = this.$element.children('ul');
+        var $ul = this.$element.find(this.options.nav);
         var tabs = [];
         var id = 0;
 
@@ -607,5 +622,9 @@
             });
         }
     };
+
+    $(function () {
+        $('.responsive-tabs').responsiveTabs();
+    })
 
 }(jQuery, window));
