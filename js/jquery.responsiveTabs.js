@@ -140,7 +140,7 @@
      */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
-        var $ul = this.$element.children('ul');
+        var $ul = this.$element.find('ul:first');
         var tabs = [];
         var id = 0;
 
