@@ -622,4 +622,8 @@
         }
     };
 
+    $(function () {
+        $('.responsive-tabs').responsiveTabs();
+    })
+
 }(jQuery, window));
