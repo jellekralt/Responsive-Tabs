@@ -20,6 +20,7 @@
         animation: 'default',
         duration: 500,
         scrollToAccordion: false,
+        nav: '> ul',
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -154,7 +155,7 @@
      */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
-        var $ul = this.$element.find('ul:first');
+        var $ul = this.$element.find(this.options.nav);
         var tabs = [];
         var id = 0;
 
