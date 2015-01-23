@@ -36,6 +36,20 @@
         }
     };
 
+    function filterDataAttrs(el) {
+        var data = $(el).data(),
+            prefix = 'rTabs',
+            result = {},
+            key;
+        for(key in data) {
+            if(data.hasOwnProperty(key) && key.indexOf(prefix) === 0) {
+              result[key.charAt(prefix.length).toLowerCase() + key.slice(prefix.length + 1)] = data[key];
+            }
+        }
+
+        return result;
+    }
+
     /**
      * Responsive Tabs
      * @constructor
@@ -52,7 +66,7 @@
         this.$queue = $({});
 
         // Extend the defaults with the passed options
-        this.options = $.extend( {}, defaults, options);
+        this.options = $.extend( {}, defaults, options, filterDataAttrs(element));
 
         this.init();
     }
