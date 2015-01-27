@@ -155,7 +155,7 @@
      */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
-        var $ul = this.$element.find(this.options.nav);
+        var $ul = this.$element.find(this.options.nav).first();
         var tabs = [];
         var id = 0;
 
