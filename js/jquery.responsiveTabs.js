@@ -2,7 +2,7 @@
  *  Project: jquery.responsiveTabs.js
  *  Description: A plugin that creates responsive tabs, optimized for all devices
  *  Author: Jelle Kralt (jelle@jellekralt.nl)
- *  Version: 1.4.2
+ *  Version: 1.4.3
  *  License: MIT
  */
 
@@ -222,16 +222,12 @@
                 // Check if hash has to be set in the URL location
                 if(_this.options.setHash) {
                     // Set the hash using the history api if available to tackle Chromes repaint bug on hash change
-                    if(history.pushState)   {
-                        
+                    if(history.pushState) {
                         history.pushState(null, null, activatedTab.selector);
-                        
                     } else {
-                        
                         // Otherwise fallback to the hash update for sites that don't support the history api
                         window.location.hash = activatedTab.selector;
-                        
-                    }                
+                    }
                 }
 
                 e.data.tab._ignoreHashChange = true;
