@@ -2,7 +2,8 @@
  *  Project: jquery.responsiveTabs.js
  *  Description: A plugin that creates responsive tabs, optimized for all devices
  *  Author: Jelle Kralt (jelle@jellekralt.nl)
- *  Version: 1.4.3
+ *  Contributor: Christoph Schüßler (schreib@herrschuessler.de)
+ *  Version: 1.4.4
  *  License: MIT
  */
 
@@ -20,6 +21,7 @@
         animation: 'default',
         duration: 500,
         scrollToAccordion: false,
+        scrollOffset: true,
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -29,6 +31,8 @@
             stateActive: 'r-tabs-state-active',
             stateDisabled: 'r-tabs-state-disabled',
             stateExcluded: 'r-tabs-state-excluded',
+            container: 'r-tabs',
+            ul: 'r-tabs-nav',
             tab: 'r-tabs-tab',
             anchor: 'r-tabs-anchor',
             panel: 'r-tabs-panel',
@@ -140,13 +144,13 @@
      */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
-        var $ul = this.$element.children('ul');
+        var $ul = this.$element.find('ul');
         var tabs = [];
         var id = 0;
 
         // Add the classes to the basic html elements
-        this.$element.addClass('r-tabs'); // Tab container
-        $ul.addClass('r-tabs-nav'); // List container
+        this.$element.addClass(_this.options.classes.container); // Tab container
+        $ul.addClass(_this.options.classes.ul); // List container
 
         // Get tab buttons and store their data in an array
         $('li', $ul).each(function() {
@@ -320,7 +324,8 @@
      * @param {Boolean} stopRotation - Defines if the tab rotation loop should be stopped
      */
     ResponsiveTabs.prototype._openTab = function(e, oTab, closeCurrent, stopRotation) {
-        var _this = this;
+        var _this = this,
+            _scrollOffset = _this.options.scrollOffset ? parseInt($('body').css('padding-top'),10) + parseInt($('body').css('margin-top'),10) + parseInt($('html').css('padding-top'),10) + parseInt($('html').css('margin-top'),10) : 0;
 
         // Check if the current tab has to be closed
         if(closeCurrent) {
@@ -340,20 +345,23 @@
 
         // Run panel transiton
         _this._doTransition(oTab.panel, _this.options.animation, 'open', function() {
+            
             // When finished, set active class to the panel
             oTab.panel.removeClass(_this.options.classes.stateDefault).addClass(_this.options.classes.stateActive);
-          
+           
            // And if enabled and state is accordion, scroll to the accordion tab
-            if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && (!_this._isInView(oTab.accordionTab) || _this.options.animation !== 'default')) {
+            if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && !_this._isInView(oTab.accordionTab)) {
+                
                 // Check if the animation option is enabled, and if the duration isn't 0
                 if(_this.options.animation !== 'default' && _this.options.duration > 0) {
                     // If so, set scrollTop with animate and use the 'animation' duration
                     $('html, body').animate({
-                        scrollTop: oTab.accordionTab.offset().top
+                        scrollTop: oTab.accordionAnchor.offset().top  - _scrollOffset
                     }, _this.options.duration);
                 } else {
-                    //  If not, just set scrollTop
-                    $('html, body').scrollTop(oTab.accordionTab.offset().top);
+
+                      //  If not, just set scrollTop
+                    $('html, body').scrollTop(oTab.accordionAnchor.offset().top - _scrollOffset);
                 }
             }
         });
