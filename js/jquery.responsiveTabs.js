@@ -3,7 +3,7 @@
  *  Description: A plugin that creates responsive tabs, optimized for all devices
  *  Author: Jelle Kralt (jelle@jellekralt.nl)
  *  Contributor: Christoph Schüßler (schreib@herrschuessler.de)
- *  Version: 1.4.4
+ *  Version: 1.4.5
  *  License: MIT
  */
 
@@ -196,7 +196,6 @@
     ResponsiveTabs.prototype._loadClasses = function() {
         for (var i=0; i<this.tabs.length; i++) {
             this.tabs[i].tab.addClass(this.options.classes.stateDefault).addClass(this.options.classes.tab);
-            this.tabs[i].anchor.addClass(this.options.classes.anchor);
             this.tabs[i].panel.addClass(this.options.classes.stateDefault).addClass(this.options.classes.panel);
             this.tabs[i].accordionTab.addClass(this.options.classes.accordionTitle);
             this.tabs[i].accordionAnchor.addClass(this.options.classes.anchor);
