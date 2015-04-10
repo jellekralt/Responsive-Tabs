@@ -47,6 +47,7 @@
         <button class="select-tab" value="3">4</button> 
         <button class="select-tab" value="4">5</button> 
     <p>
+    <p><button id="enable-tab">Enable Tab 4</button> <button id="disable-tab">Disable Tab 4</button> </p>
 
     <p class="info"></p>
 
@@ -64,7 +65,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#horizontalTab').responsiveTabs({
+            var $tabs = $('#horizontalTab');
+            $tabs.responsiveTabs({
                 rotate: false,
                 startCollapsed: 'accordion',
                 collapsible: 'accordion',
@@ -80,16 +82,22 @@
             });
 
             $('#start-rotation').on('click', function() {
-                $('#horizontalTab').responsiveTabs('startRotation', 1000);
+                $tabs.responsiveTabs('startRotation', 1000);
             });
             $('#stop-rotation').on('click', function() {
-                $('#horizontalTab').responsiveTabs('stopRotation');
+                $tabs.responsiveTabs('stopRotation');
             });
             $('#start-rotation').on('click', function() {
-                $('#horizontalTab').responsiveTabs('active');
+                $tabs.responsiveTabs('active');
+            });
+            $('#enable-tab').on('click', function() {
+                $tabs.responsiveTabs('enable', 3);
+            });
+            $('#disable-tab').on('click', function() {
+                $tabs.responsiveTabs('disable', 3);
             });
             $('.select-tab').on('click', function() {
-                $('#horizontalTab').responsiveTabs('activate', $(this).val());
+                $tabs.responsiveTabs('activate', $(this).val());
             });
 
         });
