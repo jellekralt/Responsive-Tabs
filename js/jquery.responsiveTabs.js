@@ -560,7 +560,6 @@
      * @param {Integer} tabRef - Numeric tab reference
      */
     ResponsiveTabs.prototype.enable = function(tabRef) {
-        var e = jQuery.Event('tabs-enable');
         var oTab = this._getTab(tabRef);
         if(oTab){
             oTab.disabled = false;
@@ -574,7 +573,6 @@
      * @param {Integer} tabRef - Numeric tab reference
      */
     ResponsiveTabs.prototype.disable = function(tabRef) {
-        var e = jQuery.Event('tabs-disable');
         var oTab = this._getTab(tabRef);
         if(oTab){
             oTab.disabled = true;
