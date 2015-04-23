@@ -556,6 +556,34 @@
     };
 
     /**
+     * This function enables a tab
+     * @param {Integer} tabRef - Numeric tab reference
+     */
+    ResponsiveTabs.prototype.enable = function(tabRef) {
+        var e = jQuery.Event('tabs-enable');
+        var oTab = this._getTab(tabRef);
+        if(oTab){
+            oTab.disabled = false;
+            oTab.tab.addClass(this.options.classes.stateDefault).removeClass(this.options.classes.stateDisabled);
+            oTab.accordionTab.addClass(this.options.classes.stateDefault).removeClass(this.options.classes.stateDisabled);
+        }
+    };
+
+    /**
+     * This function disable a tab
+     * @param {Integer} tabRef - Numeric tab reference
+     */
+    ResponsiveTabs.prototype.disable = function(tabRef) {
+        var e = jQuery.Event('tabs-disable');
+        var oTab = this._getTab(tabRef);
+        if(oTab){
+            oTab.disabled = true;
+            oTab.tab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateDisabled);
+            oTab.accordionTab.removeClass(this.options.classes.stateDefault).addClass(this.options.classes.stateDisabled);
+        }
+    };
+
+    /**
      * This function gets the current state of the plugin
      * @returns {String} State of the plugin
      */
