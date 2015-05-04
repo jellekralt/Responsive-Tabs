@@ -135,6 +135,15 @@ animation: 'fade', // The panels will fade in and out
 animation: 'slide', // The panels will slide up and down
 ```
 
+You can enable / disable the queueing of the animation by setting the ```animationQueue``` option.
+
+```javascript
+animationQueue: false, // (default) disables the queueing of the animations. With this option on, all animations happen at the same time
+animationQueue: true, // enables the queueing of the animations. With this option on, animations wait for each other
+animationQueue: 'tabs', // enables the queueing of the animations for the tabs state only
+animationQueue: 'accordion', // enables the queueing of the animations for the accordion state only
+```
+
 Callbacks
 ---------
 
