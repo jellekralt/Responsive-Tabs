@@ -359,8 +359,6 @@
             }
         });
 
-
-
         this.$element.trigger('tabs-activate', oTab);
     };
 
