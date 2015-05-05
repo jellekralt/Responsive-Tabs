@@ -620,6 +620,17 @@
         this.rotateInterval = 0;
     };
 
+    /**
+     * This function can be used to get/set options
+     * @return {any} Option value
+     */
+    ResponsiveTabs.prototype.option = function(key, value) {
+        if(value) {
+            this.options[key] = value;
+        }
+        return this.options[key];
+    };
+
     /** jQuery wrapper */
     $.fn.responsiveTabs = function ( options ) {
         var args = arguments;
