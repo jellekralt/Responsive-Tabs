@@ -1,27 +1,35 @@
 {
-    "name": "responsive-tabs",
-    "version": "1.4.5",
-    "author": "Jelle Kralt <jelle@jellekralt.nl>",
-    "description": "jQuery plugin that provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.",
-    "contributors": [
-        {
-            "name": "Jelle Kralt",
-            "email": "jelle@jellekralt.nl"
-        }
-    ],
-    "main": "./js/jquery.responsiveTabs.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jellekralt/Responsive-Tabs.git"
-    },
-    "keywords": [
-        "jquery-plugin",
-        "responsive",
-        "tabs",
-        "jquery"
-    ],
-    "dependencies" : {
-        "jQuery"   :  "1.7.4"
-    },
-    "license": "MIT"
+  "name": "responsive-tabs",
+  "version": "1.4.5",
+  "author": "Jelle Kralt <jelle@jellekralt.nl>",
+  "description": "jQuery plugin that provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.",
+  "contributors": [
+    {
+      "name": "Jelle Kralt",
+      "email": "jelle@jellekralt.nl"
+    }
+  ],
+  "main": "./js/jquery.responsiveTabs.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jellekralt/Responsive-Tabs.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "responsive",
+    "tabs",
+    "jquery"
+  ],
+  "dependencies": {
+    "jQuery": "1.7.4"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.8.0",
+    "connect-modrewrite": "^0.8.1",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0"
+  }
 }
