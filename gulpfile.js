@@ -4,6 +4,7 @@ var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var modRewrite = require('connect-modrewrite');
+var qunit = require('node-qunit-phantomjs');
 var gulp = require('gulp');
 
 var config = {
@@ -30,6 +31,11 @@ gulp.task('lint', function() {
 	return gulp.src(config.paths.scripts)
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
+});
+
+// Test
+gulp.task('test', function() {
+	qunit('./test/fixture.html');
 });
 
 // Watch
