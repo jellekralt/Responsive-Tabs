@@ -21,6 +21,7 @@
         animationQueue: false,
         duration: 500,
         scrollToAccordion: false,
+        accordionTabHtmlTag: 'div',
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -161,7 +162,7 @@
                 $anchor = $('a', $tab);
                 panelSelector = $anchor.attr('href');
                 $panel = $(panelSelector);
-                $accordionTab = $('<div></div>').insertBefore($panel);
+                $accordionTab = $('<' + _this.options.accordionTabHtmlTag + '/>').insertBefore($panel);
                 $accordionAnchor = $('<a></a>').attr('href', panelSelector).html($anchor.html()).appendTo($accordionTab);
 
                 var oTab = {
