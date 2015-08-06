@@ -103,6 +103,13 @@ An 0 based integer that defines the initial opened tab on load.
 active: 1 // Opens the second tab on load
 ```
 
+### Accordion Tab HTML element
+A single HTML element template in which the accordion tab will be wrapped.
+
+```javascript
+accordionTabElement: '<div></div>'
+```
+
 ### Set hash
 A boolean that can be used to enable and disable the setting of a reference to the selected tab in the URL hash. If set to 'true', the selecting of a new tab will set the reference to that tab in the URL hash.
 
