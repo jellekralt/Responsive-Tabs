@@ -30,6 +30,8 @@
             stateActive: 'r-tabs-state-active',
             stateDisabled: 'r-tabs-state-disabled',
             stateExcluded: 'r-tabs-state-excluded',
+            container: 'r-tabs',
+            ul: 'r-tabs-nav',
             tab: 'r-tabs-tab',
             anchor: 'r-tabs-anchor',
             panel: 'r-tabs-panel',
@@ -146,8 +148,8 @@
         var id = 0;
 
         // Add the classes to the basic html elements
-        this.$element.addClass('r-tabs'); // Tab container
-        $ul.addClass('r-tabs-nav'); // List container
+        this.$element.addClass(_this.options.classes.container); // Tab container
+        $ul.addClass(_this.options.classes.ul); // List container
 
         // Get tab buttons and store their data in an array
         $('li', $ul).each(function() {
