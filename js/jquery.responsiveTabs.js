@@ -133,7 +133,7 @@
         // Trigger loaded event
         this.$element.trigger('tabs-load');
     };
-    
+
     //
     // PRIVATE FUNCTIONS
     //
@@ -265,7 +265,7 @@
     ResponsiveTabs.prototype._getStartTab = function() {
         var tabRef = this._getTabRefBySelector(window.location.hash);
         var startTab;
-        
+
         // Check if the page has a hash set that is linked to a tab
         if(tabRef >= 0 && !this._getTab(tabRef).disabled) {
             // If so, set the current tab to the linked tab
@@ -344,7 +344,7 @@
         _this._doTransition(oTab.panel, _this.options.animation, 'open', function() {
             // When finished, set active class to the panel
             oTab.panel.removeClass(_this.options.classes.stateDefault).addClass(_this.options.classes.stateActive);
-          
+
            // And if enabled and state is accordion, scroll to the accordion tab
             if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && (!_this._isInView(oTab.accordionTab) || _this.options.animation !== 'default')) {
                 // Check if the animation option is enabled, and if the duration isn't 0
@@ -525,7 +525,7 @@
 
     //
     // HELPER FUNCTIONS
-    // 
+    //
 
     ResponsiveTabs.prototype._isInView = function($element) {
         var docViewTop = $(window).scrollTop(),
