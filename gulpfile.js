@@ -55,6 +55,8 @@ gulp.task('serve', ['watch'], function() {
 			]
         }
     });
+
+    gulp.watch('*.html').on('change', browserSync.reload);
 });
 
 gulp.task('default', ['serve']);
