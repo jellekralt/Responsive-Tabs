@@ -24,12 +24,21 @@ Features
 How to use
 ==========
 
-=> Requires jQuery (minimaly jQuery 1.7.0)
-=> Include jquery.responsiveTabs.js
-=> Include responsive-tabs.css for the basic Tabs to Accordion switching
-=> Include style.css for a basic tab/accordion theme
+* Requires jQuery (minimaly jQuery 1.7.0)
+* Include jquery.responsiveTabs.js
+```html
+<script src="js/jquery.responsiveTabs.js"></script>
+```
+* Include responsive-tabs.css for the basic Tabs to Accordion switching
+```html
+<link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
+```
+* Include style.css for a basic tab/accordion theme
+```html
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+```
 
-=> Use this HTML markup:
+* Use this HTML markup:
 
 ```html
 <div id="responsiveTabsDemo">
@@ -45,7 +54,7 @@ How to use
 </div>
 ```
 
-=> Use this jQuery function to enable responsive tabs on the selected element:
+* Use this jQuery function to enable responsive tabs on the selected element:
 
 ```javascript
 $('#responsiveTabsDemo').responsiveTabs({
@@ -271,8 +280,10 @@ This event is triggered when the state of the plugin changes
 ToDo
 ====
 I am planning on adding these options in the future:
-- Ajax panels
 - Keyboard interaction
+- Vertical Tabs
+- Refresh method
+- Multiple Accorion open
 
 If you have good ideas / tips about options / functionality, let me know!
 
@@ -286,12 +297,6 @@ Support
 =======
 If you have any questions, problems or suggestions, feel free to submit a ticket!
 Also, pull requests with improvements, new features or other great stuff are always very welcome.
-
-Buy me a beer!
-==============
-If you enjoy this plugin and like to make a donation you can use the button below :).
-
-[![Buy me a beer](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jelle%40jellekralt%2enl&lc=NL&item_name=Jelle%20Kralt&item_number=responsive%2dtabs&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
 Licence
 =======
