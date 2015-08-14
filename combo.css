@@ -1,5 +1,6 @@
 ---
 ---
+{% include css/browser.css %}
 {% include css/base.css %}
 {% include css/skeleton.css %}
 {% include css/main.css %}
