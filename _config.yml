@@ -15,10 +15,10 @@ highlighter: pygments
 
 
 ### content configuration ###
-title:       "SinglePaged - Title: Edit me in _config.yml!"
-keywords:    "SinglePaged, jekyll, template, github, blog, single page"
-description: "A single-page template for Jekyll based blogs (like what you'd use on github pages!)"
-source_link: "https://github.com/t413/SinglePaged"
+title:       "jQuery Responsive Tabs"
+keywords:    "jQuery, Responsive, Tabs, Accordion"
+description: "jQuery plugin that provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint."
+source_link: "https://github.com/jellekralt/Responsive-Tabs"
 favicon:     #put a path like: "img/favicon.ico"
 touch_icon:  #put a path like: "img/apple-touch-icon.png"
 google_analytics_key: ## put YOUR key here to enable tracking! (blank to disable)
