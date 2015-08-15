@@ -303,6 +303,13 @@ nav ul li:hover, nav ul li.active {
   }
 }
 
+.browser-mockup {
+  padding: 20px;
+  margin: 2em;
+  flex: 1;
+  background-color: white;
+}
+
 
 
 /* mid size (tablets, landscapes) */
