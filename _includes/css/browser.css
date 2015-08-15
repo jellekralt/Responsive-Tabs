@@ -1,15 +1,15 @@
 .browser-mockup {
-  border-top: 3em solid rgba(230, 230, 230, 0.7);
+  border-top: 2.5em solid rgba(230, 230, 230, 0.7);
   box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.4);
   position: relative;
-  border-radius: 3px 3px 0 0
+  border-radius: 5px;
 }
 
 .browser-mockup:before {
   display: block;
   position: absolute;
   content: '';
-  top: -1.75em;
+  top: -1.5em;
   left: 1em;
   width: 0.5em;
   height: 0.5em;

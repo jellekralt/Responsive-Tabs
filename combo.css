@@ -1,7 +1,8 @@
 ---
 ---
 {% include css/browser.css %}
-{% include css/tabs.css %}
 {% include css/base.css %}
 {% include css/skeleton.css %}
 {% include css/main.css %}
+{% include css/tabs.css %}
+

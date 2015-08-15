@@ -26,7 +26,7 @@
 	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
 	font-size: 14px;
 	font-weight: bold;
-	color: #fff;
+	color: #fff !important;
 }
 
 /* Disabled tab */
@@ -36,7 +36,7 @@
 
 /* Active state tab anchor */
 .r-tabs .r-tabs-nav .r-tabs-state-active .r-tabs-anchor {
-	color: #00c5ad;
+	color: #00c5ad !important;
 	text-shadow: none;
 
 	background-color: white;
@@ -62,7 +62,7 @@
 	padding: 10px;
 
 	background-color: #00c5ad;
-	color: #fff;
+	color: #fff !important;
 	font-weight: bold;
 	text-decoration: none;
 	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
@@ -75,7 +75,7 @@
 /* Active accordion anchor */
 .r-tabs .r-tabs-accordion-title.r-tabs-state-active .r-tabs-anchor {
 	background-color: #fff;
-	color: #00c5ad;
+	color: #00c5ad !important;
 	text-shadow: none;
 }
 
