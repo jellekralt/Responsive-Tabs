@@ -62,17 +62,22 @@ $('#responsiveTabsDemo').responsiveTabs({
 });
 ```
 
-Install
+Get
 =======
 
-### npm
-
-    npm install responsive-tabs
-    
 ### Bower
 
     bower install responsive-tabs
     
+### NPM
+
+    npm install responsive-tabs
+    
+### CDN
+
+Responsive Tabs is available on [jsDelivr](http://www.jsdelivr.com/)
+
+    http://www.jsdelivr.com/#!jquery.responsive-tabs
     
 API
 ===
