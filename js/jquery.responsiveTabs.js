@@ -21,6 +21,7 @@
         animationQueue: false,
         duration: 500,
         scrollToAccordion: false,
+        scrollToAccordionOffsetElement: false,
         accordionTabElement: '<div></div>',
         activate: function(){},
         deactivate: function(){},
@@ -322,7 +323,8 @@
      * @param {Boolean} stopRotation - Defines if the tab rotation loop should be stopped
      */
     ResponsiveTabs.prototype._openTab = function(e, oTab, closeCurrent, stopRotation) {
-        var _this = this;
+        var _this = this,
+            scrollOffset;
 
         // Check if the current tab has to be closed
         if(closeCurrent) {
@@ -347,15 +349,19 @@
 
            // And if enabled and state is accordion, scroll to the accordion tab
             if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && (!_this._isInView(oTab.accordionTab) || _this.options.animation !== 'default')) {
+                
+                // Add offset element's height to scroll position
+                scrollOffset = (_this.options.scrollToAccordionOffsetElement) ? oTab.accordionTab.offset().top - _this.options.scrollToAccordionOffsetElement.outerHeight() : oTab.accordionTab.offset().top;
+
                 // Check if the animation option is enabled, and if the duration isn't 0
                 if(_this.options.animation !== 'default' && _this.options.duration > 0) {
                     // If so, set scrollTop with animate and use the 'animation' duration
                     $('html, body').animate({
-                        scrollTop: oTab.accordionTab.offset().top
+                        scrollTop: scrollOffset
                     }, _this.options.duration);
                 } else {
                     //  If not, just set scrollTop
-                    $('html, body').scrollTop(oTab.accordionTab.offset().top);
+                    $('html, body').scrollTop(scrollOffset);
                 }
             }
         });
