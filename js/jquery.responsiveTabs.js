@@ -22,6 +22,7 @@
         duration: 500,
         scrollToAccordion: false,
         accordionTabElement: '<div></div>',
+        accordionMultiCollapse: true,
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -236,11 +237,17 @@
 
                 e.data.tab._ignoreHashChange = true;
 
+                // Close all should only be used if the current state is accordion
+                var accordionMultiCollapse = _this.state === 'accordion' ? _this.options.accordionMultiCollapse : true;
+
                 // Check if the activated tab isnt the current one or if its collapsible. If not, do nothing
-                if(current !== activatedTab || _this._isCollapisble()) {
-                    // The activated tab is either another tab of the current one. If it's the current tab it is collapsible
+                if(current !== activatedTab || _this._isCollapisble())  {                   
+                    // The activated tab is either another tab of the current one. 
+                    // If it's the current tab it is collapsible
                     // Either way, the current tab can be closed
+                    if(accordionMultiCollapse !== false || current === activatedTab)  {
                     _this._closeTab(e, current);
+                    }
 
                     // Check if the activated tab isnt the current one or if it isnt collapsible
                     if(current !== activatedTab || !_this._isCollapisble()) {
@@ -372,7 +379,7 @@
         var _this = this;
         var doQueueOnState = typeof _this.options.animationQueue === 'string';
         var doQueue;
-
+        
         if(oTab !== undefined) {
             if(doQueueOnState && _this.getState() === _this.options.animationQueue) {
                 doQueue = true;
