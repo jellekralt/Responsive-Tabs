@@ -165,6 +165,26 @@ animationQueue: 'tabs', // enables the queueing of the animations for the tabs s
 animationQueue: 'accordion', // enables the queueing of the animations for the accordion state only
 ```
 
+You can set the speed of the animation by setting the ```duration``` option.
+```javascript
+duration: 500, // (default) Sets the animation duration to 500
+```
+
+### Scroll to Accordion panel
+This options can be used to enable automatic scrolling to the accordion panel that has been opened
+
+```javascript
+scrollToAccordion: false, // (default) disables the auto scrolling to the accordion panel
+scrollToAccordion: true, // enables the auto scrolling to the accordion panel
+```
+
+You can define an offset in pixels for the scroll to accordion panel by setting the ```scrollToAccordionOffset``` option.
+
+```javascript
+scrollToAccordionOffset: false, // (default) disables the auto scrolling to the accordion panel
+scrollToAccordionOffset: true, // enables the auto scrolling to the accordion panel
+```
+
 Callbacks
 ---------
 
