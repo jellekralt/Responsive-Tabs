@@ -643,6 +643,8 @@
     /** jQuery wrapper */
     $.fn.responsiveTabs = function ( options ) {
         var args = arguments;
+        var instance;
+
         if (options === undefined || typeof options === 'object') {
             return this.each(function () {
                 if (!$.data(this, 'responsivetabs')) {
@@ -650,19 +652,19 @@
                 }
             });
         } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-            return this.each(function () {
-                var instance = $.data(this, 'responsivetabs');
+            instance = $.data(this[0], 'responsivetabs');
 
-                if (instance instanceof ResponsiveTabs && typeof instance[options] === 'function') {
-                    instance[options].apply( instance, Array.prototype.slice.call( args, 1 ) );
-                }
+            // Allow instances to be destroyed via the 'destroy' method
+            if (options === 'destroy') {
+                // TODO: destroy instance classes, etc
+                $.data(this, 'responsivetabs', null);
+            }
 
-                // Allow instances to be destroyed via the 'destroy' method
-                if (options === 'destroy') {
-                    // TODO: destroy instance classes, etc
-                    $.data(this, 'responsivetabs', null);
-                }
-            });
+            if (instance instanceof ResponsiveTabs && typeof instance[options] === 'function') {
+                return instance[options].apply( instance, Array.prototype.slice.call( args, 1 ) );
+            } else {
+                return this;
+            }
         }
     };
 
