@@ -1,11 +1,3 @@
-/*!
- *  Project: jquery.responsiveTabs.js
- *  Description: A plugin that creates responsive tabs, optimized for all devices
- *  Author: Jelle Kralt (jelle@jellekralt.nl)
- *  Version: 1.5.1
- *  License: MIT
- */
-
 ;(function ( $, window, undefined ) {
 
     /** Default settings */
