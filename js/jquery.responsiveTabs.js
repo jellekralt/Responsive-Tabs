@@ -137,7 +137,7 @@
      */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
-        var $ul = this.$element.children('ul');
+        var $ul = this.$element.children('ul:first');
         var tabs = [];
         var id = 0;
 
@@ -278,7 +278,7 @@
      * @param {Event} e - The event that triggers the state change
      */
     ResponsiveTabs.prototype._setState = function(e) {
-        var $ul = $('ul', this.$element);
+        var $ul = $('ul:first', this.$element);
         var oldState = this.state;
         var startCollapsedIsState = (typeof this.options.startCollapsed === 'string');
         var startTab;
