@@ -178,6 +178,14 @@ scrollToAccordion: false, // (default) disables the auto scrolling to the accord
 scrollToAccordion: true, // enables the auto scrolling to the accordion panel
 ```
 
+### Scroll to Accordion panel on load
+This option can be used to disabling the scrolling to an accordion panel on load
+
+```javascript
+scrollToAccordionOnLoad: true, // (default) enables scrolling to accordion on load
+scrollToAccordionOnLoad: false, // disables scrolling to accordion on load
+```
+
 You can define an offset in pixels for the scroll to accordion panel by setting the ```scrollToAccordionOffset``` option.
 
 ```javascript
