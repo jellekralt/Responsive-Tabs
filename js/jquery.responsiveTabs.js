@@ -13,6 +13,7 @@
         animationQueue: false,
         duration: 500,
         scrollToAccordion: false,
+        scrollToAccordionOnLoad: true,
         scrollToAccordionOffset: 0,
         accordionTabElement: '<div></div>',
         activate: function(){},
@@ -336,11 +337,13 @@
 
         // Run panel transiton
         _this._doTransition(oTab.panel, _this.options.animation, 'open', function() {
+            var scrollOnLoad = (e.type !== 'tabs-load' || _this.options.scrollToAccordionOnLoad);
+
             // When finished, set active class to the panel
             oTab.panel.removeClass(_this.options.classes.stateDefault).addClass(_this.options.classes.stateActive);
 
             // And if enabled and state is accordion, scroll to the accordion tab
-            if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && (!_this._isInView(oTab.accordionTab) || _this.options.animation !== 'default')) {
+            if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && (!_this._isInView(oTab.accordionTab) || _this.options.animation !== 'default') && scrollOnLoad) {
 
                 // Add offset element's height to scroll position
                 scrollOffset = oTab.accordionTab.offset().top - _this.options.scrollToAccordionOffset;
