@@ -221,7 +221,7 @@
                 if(_this.options.setHash) {
                     // Set the hash using the history api if available to tackle Chromes repaint bug on hash change
                     if(history.pushState) {
-                        history.pushState(null, null, activatedTab.selector);
+                        history.pushState(null, null, window.location.origin + window.location.pathname + window.location.search + activatedTab.selector);
                     } else {
                         // Otherwise fallback to the hash update for sites that don't support the history api
                         window.location.hash = activatedTab.selector;
