@@ -18,11 +18,11 @@ var config = {
 };
 
 gulp.task('release', function(cb) {
-    runSequence('bump', 'build', cb);
+    runSequence('test', 'bump', 'build', cb);
 });
 
 // Build
-gulp.task('build', function() {
+gulp.task('build', ['test'], function() {
     var pkg = require('./package.json');
     var banner = ['/**',
         ' * <%= pkg.name %>',
