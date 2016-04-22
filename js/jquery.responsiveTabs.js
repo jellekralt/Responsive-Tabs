@@ -31,7 +31,16 @@
             anchor: 'r-tabs-anchor',
             panel: 'r-tabs-panel',
             accordionTitle: 'r-tabs-accordion-title'
-        }
+        },
+		magictabs: {
+			panelSelector: 'r-tabs-magictabs-panel',
+        	titleElements: ['h2','h3','h4','h5','h6'],
+        	titleStripHTML: false,
+        	dataAttrTitle: 'magictabs-title',
+        	dataAttrId: 'magictabs-id',
+        	autoIdContainerPrefix: 'c',
+        	autoIdTabPrefix: 't',        		
+        }        
     };
 
     /**
@@ -142,6 +151,12 @@
         var tabs = [];
         var id = 0;
 
+		// Check if tabs list exists
+		if (!$ul.get(0)) {
+			// Tabs list does not exists -> Do some tab magic and create and insert list of tabs
+        	var $ul = this._tabMagic();;
+		}
+
         // Add the classes to the basic html elements
         this.$element.addClass(_this.options.classes.container); // Tab container
         $ul.addClass(_this.options.classes.ul); // List container
@@ -251,6 +266,94 @@
             this.tabs[i].accordionAnchor.on(_this.options.event, {tab: _this.tabs[i]}, fActivate);
         }
     };
+
+
+    /**
+     * This function examines the tab panels and extracts data for building the list of tabs
+     * It modifies the DOM tree and adds a <ul>-list with tabs to the warpper container element
+     * It also modifies the tab panels and adds an ID where necessary
+     * @returns the DOM element with the list of tabs
+     */
+    ResponsiveTabs.prototype._tabMagic = function() {
+
+		var _this = this;
+
+		// Get ID of wrapper container
+		if (this.$element.attr('id')) {
+			// Use ID if id exists
+			var container_id = this.$element.attr('id');
+		} else {
+			var container_id = this.$element.data(_this.options.magictabs.dataAttrId);
+			// Generate ID if it still does not exist 
+			if (!container_id) {
+				var container_id = _this.options.magictabs.autoIdContainerPrefix+this.options.instanceNo;
+			}	
+		}
+
+		var $ul = $('<ul>');
+		var $panels = this.$element.children(this.options.magictabs.panelSelector);
+		var tab_count = 0;
+			
+		$panels.each(function() {
+        
+            // 1up the tab_count
+			// The 1st tab is #1, the 2nd is #2 etc.
+			tab_count++;
+
+			// Get the ID 
+			if ($(this).attr('id')) {
+				// Use ID if id exists
+				var panel_id = $(this).attr('id');
+			} else {
+				// Read data-magictabs-id attribute 
+				var panel_id = $(this).data(_this.options.magictabs.dataAttrId);
+				// Generate ID if it still does not exist 
+				if (!panel_id) {
+					var panel_id = 'mtab__'+container_id+'__'+_this.options.magictabs.autoIdTabPrefix+tab_count;
+				}
+				// Assign ID to the panel
+				$(this).attr('id', panel_id);
+			}
+			// Get the tab title
+			var title = $(this).data(_this.options.magictabs.dataAttrTitle);
+			if (typeof(title) == 'undefined') {
+
+				// Title was not defined in the data-magictabs-title attribute of the DIV,
+ 				// So try to get the title from an element within the DIV.
+				// Go through the list of elements in this.options.magictabs.titleElements
+				// (typically heading elements ['h2','h3','h4'])
+				for (i=0; i < _this.options.magictabs.titleElements.length; i++) {
+					var headingElement = $(this).find(_this.options.magictabs.titleElements[i]).get(0);
+					if (headingElement) {
+						var title = headingElement.innerHTML;
+						title.replace(/<br>/gi," ");
+						if (_this.options.magictabs.titleStripHTML) {
+							title = title.replace(/<[^>]+>/g,"");
+						}
+						break;
+					}
+				}				
+			}
+			if (!title) {
+			    // Title was not found (or is blank) so automatically generate a
+				// number for the tab.
+				var title = tab_count;
+			}
+		
+			// Create list item
+			var $a = $('<a>'+title+'</a>').attr('href', '#'+panel_id);
+			var $li = $('<li>');
+			$li.append($a);
+			// Add list item to list
+			$ul.append($li);			
+				
+		});
+		// Insert the list of tab elements as first child of the wrapper container 
+		this.$element.prepend($ul);
+       
+        return $ul;
+
+	}
 
     /**
      * This function gets the tab that should be opened at start
@@ -639,9 +742,12 @@
     $.fn.responsiveTabs = function ( options ) {
         var args = arguments;
         var instance;
-
+    	var instance_cnt = 0;
+ 
         if (options === undefined || typeof options === 'object') {
             return this.each(function () {
+             	instance_cnt++;
+            	var options = $.extend({}, {instanceNo: instance_cnt}, options);
                 if (!$.data(this, 'responsivetabs')) {
                     $.data(this, 'responsivetabs', new ResponsiveTabs( this, options ));
                 }
