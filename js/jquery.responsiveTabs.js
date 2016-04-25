@@ -16,6 +16,7 @@
         scrollToAccordionOnLoad: true,
         scrollToAccordionOffset: 0,
         accordionTabElement: '<div></div>',
+        accordionMultiCollapse: true,
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -45,6 +46,8 @@
         this.$element = $(element); // Selected jQuery element
 
         this.tabs = []; // Create tabs array
+        this.activeAccordion = [];
+        this.multiCollapse = true;
         this.state = ''; // Define the plugin state (tabs/accordion)
         this.rotateInterval = 0; // Define rotate interval
         this.$queue = $({});
@@ -229,18 +232,33 @@
                 }
 
                 e.data.tab._ignoreHashChange = true;
-
+                
                 // Check if the activated tab isnt the current one or if its collapsible. If not, do nothing
                 if(current !== activatedTab || _this._isCollapisble()) {
                     // The activated tab is either another tab of the current one. If it's the current tab it is collapsible
                     // Either way, the current tab can be closed
-                    _this._closeTab(e, current);
+                    
+                    if(_this.multiCollapse == true || $.inArray(activatedTab, _this.activeAccordion) != -1) {
+                        
+                        if($.inArray(activatedTab, _this.activeAccordion) != -1)    {
+                            
+                            _this._closeTab(e, activatedTab);
+                            
+                            return;
+                            
+                        } else {
+                            
+                            _this._closeTab(e, current); 
+                        }
+                    }
 
                     // Check if the activated tab isnt the current one or if it isnt collapsible
                     if(current !== activatedTab || !_this._isCollapisble()) {
                         _this._openTab(e, activatedTab, false, true);
                     }
                 }
+                
+                
             }
         };
 
@@ -288,18 +306,31 @@
         if($ul.is(':visible')){
             // Tab list is visible, so the state is 'tabs'
             this.state = 'tabs';
+            
+            this.multiCollapse = true;
         } else {
             // Tab list is invisible, so the state is 'accordion'
             this.state = 'accordion';
+            
+            this.multiCollapse = this.options.accordionMultiCollapse == true;
         }
-
+        
         // If the new state is different from the old state
         if(this.state !== oldState) {
+            
             // If so, the state activate trigger must be called
             this.$element.trigger('tabs-activate-state', {oldState: oldState, newState: this.state});
+            
+            // If multiple tabs are open close them all
+            if(this.activeAccordion.length > 1) {
+                
+                for (var i = 0; i < this.activeAccordion.length; i++) {
+                    this._closeTab(e, this.activeAccordion[i]);
+                }
+            }
 
             // Check if the state switch should open a tab
-            if(oldState && startCollapsedIsState && this.options.startCollapsed !== this.state && this._getCurrentTab() === undefined) {
+            if(oldState && startCollapsedIsState && this.options.startCollapsed !== this.state && this._getCurrentTab() === undefined || this.activeAccordion.length > 1) {
                 // Get initial tab
                 startTab = this._getStartTab(e);
                 // Open the initial tab
@@ -360,7 +391,10 @@
                 }
             }
         });
-
+        
+        // Store the current active tabs for future use
+        this.activeAccordion.push(oTab);
+        
         this.$element.trigger('tabs-activate', oTab);
     };
 
@@ -397,6 +431,9 @@
 
             this.$element.trigger('tabs-deactivate', oTab);
         }
+        
+        // Update the the current active tabs for future use - may stick an if around this
+        this.activeAccordion.splice($.inArray(oTab, this.activeAccordion),1);
     };
 
     /**
