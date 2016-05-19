@@ -71,6 +71,7 @@
         // Window resize bind to check state
         $(window).on('resize', function(e) {
             _this._setState(e);
+            _this._equaliseHeights();
         });
 
         // Hashchange event
@@ -534,26 +535,13 @@
      * This function gets the tallest tab and applied the height to all tabs
      */
     ResponsiveTabs.prototype._equaliseHeights = function() {
-        var _this = this;
-        // Loop all tabs
-        $(window).on('load.tabs resize.tabs', function(){
-            var tallest = 0;
-            // Loop over the tab panels
-            if(_this.state === 'tabs')  {
-                for (var i=0; i<_this.tabs.length; i++) {
-                    $(_this.tabs[i].panel).css('minHeight', 0);
-                    if($(_this.tabs[i].panel).outerHeight() > tallest)   {
-                        tallest = $(_this.tabs[i].panel).height();
-                    }
-                }
-            } else {
-                tallest = 0;
-            }
-            if(tallest > 0)    {
-                $('> .' + _this.options.classes.panel, _this.$element).css('minHeight', tallest);
-            } else {
-                $('> .' + _this.options.classes.panel, _this.$element).css('minHeight', '');
-            }
+        var maxHeight = 0;
+
+        $.each($.map(this.tabs, function(tab) {
+            maxHeight = Math.max(maxHeight, tab.panel.css('minHeight', '').height());
+            return tab.panel;
+        }), function() {
+            this.css('minHeight', maxHeight);
         });
     };
 
