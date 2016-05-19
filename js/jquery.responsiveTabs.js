@@ -12,6 +12,7 @@
         animation: 'default',
         animationQueue: false,
         duration: 500,
+        fluidHeight: true,
         scrollToAccordion: false,
         scrollToAccordionOnLoad: true,
         scrollToAccordionOffset: 0,
@@ -70,6 +71,7 @@
         // Window resize bind to check state
         $(window).on('resize', function(e) {
             _this._setState(e);
+            _this._equaliseHeights();
         });
 
         // Hashchange event
@@ -87,6 +89,11 @@
         // Start rotate event if rotate option is defined
         if(this.options.rotate !== false) {
             this.startRotation();
+        }
+
+        // Set fluid height
+        if(this.options.fluidHeight !== true)  {
+            _this._equaliseHeights();
         }
 
         // --------------------
@@ -522,6 +529,20 @@
         }
         // No tabs have been found, return negative index
         return -1;
+    };
+
+    /**
+     * This function gets the tallest tab and applied the height to all tabs
+     */
+    ResponsiveTabs.prototype._equaliseHeights = function() {
+        var maxHeight = 0;
+
+        $.each($.map(this.tabs, function(tab) {
+            maxHeight = Math.max(maxHeight, tab.panel.css('minHeight', '').height());
+            return tab.panel;
+        }), function() {
+            this.css('minHeight', maxHeight);
+        });
     };
 
     //
