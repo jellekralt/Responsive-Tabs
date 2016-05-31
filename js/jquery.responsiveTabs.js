@@ -17,6 +17,7 @@
         scrollToAccordionOnLoad: true,
         scrollToAccordionOffset: 0,
         accordionTabElement: '<div></div>',
+        clicked: function(){},
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -220,6 +221,11 @@
             var activatedTab = e.data.tab;
 
             e.preventDefault();
+
+            // Callback function for whenever a tab is clicked/touched even if the tab is disabled
+            if (typeof _this.options.clicked === 'function') {
+                _this.options.clicked(e, activatedTab);
+            }
 
             // Make sure this tab isn't disabled
             if(!activatedTab.disabled) {

@@ -72,6 +72,9 @@
                 collapsible: 'accordion',
                 setHash: true,
                 disabled: [3,4],
+                clicked: function(e, tab) {
+                    console.log('Tab ' + tab.id + ' has been clicked');
+                },
                 activate: function(e, tab) {
                     $('.info').html('Tab <strong>' + tab.id + '</strong> activated!');
                 },
