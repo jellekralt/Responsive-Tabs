@@ -196,6 +196,17 @@ scrollToAccordionOffset: true, // enables the auto scrolling to the accordion pa
 Callbacks
 ---------
 
+### Clicked
+This callback is called after a tab is clicked, regardless of whether it's disabled
+
+**Arguments**
+- event: Clicked event
+- tab: Clicked tab object
+
+```javascript
+clicked: function(event, tab){},
+```
+
 ### Activate
 This callback is called after a tab is selected
 

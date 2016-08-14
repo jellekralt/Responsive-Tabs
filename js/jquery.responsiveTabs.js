@@ -17,6 +17,7 @@
         scrollToAccordionOnLoad: true,
         scrollToAccordionOffset: 0,
         accordionTabElement: '<div></div>',
+        click: function(){},
         activate: function(){},
         deactivate: function(){},
         load: function(){},
@@ -99,6 +100,11 @@
         // --------------------
         // Define plugin events
         //
+
+        // Activate: this event is called when a tab is selected
+        this.$element.bind('tabs-click', function(e, oTab) {
+            _this.options.click.call(this, e, oTab);
+        });
 
         // Activate: this event is called when a tab is selected
         this.$element.bind('tabs-activate', function(e, oTab) {
@@ -220,6 +226,9 @@
             var activatedTab = e.data.tab;
 
             e.preventDefault();
+
+            // Trigger click event for whenever a tab is clicked/touched even if the tab is disabled
+            activatedTab.tab.trigger('tabs-click', activatedTab);
 
             // Make sure this tab isn't disabled
             if(!activatedTab.disabled) {
