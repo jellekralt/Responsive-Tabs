@@ -72,7 +72,9 @@
         // Window resize bind to check state
         $(window).on('resize', function(e) {
             _this._setState(e);
-            _this._equaliseHeights();
+            if(_this.options.fluidHeight !== true) {
+                _this._equaliseHeights();
+            }
         });
 
         // Hashchange event
@@ -93,7 +95,7 @@
         }
 
         // Set fluid height
-        if(this.options.fluidHeight !== true)  {
+        if(this.options.fluidHeight !== true) {
             _this._equaliseHeights();
         }
 
