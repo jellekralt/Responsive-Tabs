@@ -239,6 +239,11 @@
                 if(_this.options.setHash) {
                     // Set the hash using the history api if available to tackle Chromes repaint bug on hash change
                     if(history.pushState) {
+                        // Fix for missing window.location.origin in IE
+                        if (!window.location.origin) {
+                            window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+                        }
+                        
                         history.pushState(null, null, window.location.origin + window.location.pathname + window.location.search + activatedTab.selector);
                     } else {
                         // Otherwise fallback to the hash update for sites that don't support the history api
