@@ -6,13 +6,17 @@
     QUnit.module('responsive-tabs');
 
     QUnit.test('creatable', function(assert) {
-        var $tabs = $('#horizontalTab');
+        var $element = $('#horizontalTab');
+        var $tabNav = $element.find('ul, ol');
+        var $tabs = $tabNav.find('li');
+        var $panels = $element.find('.r-tabs-panel');
 
-        assert.ok($tabs.responsiveTabs(), 'can be added');
-        assert.equal($tabs.hasClass('r-tabs'), true, 'container class was added correctly');
-        assert.equal($tabs.find('> ul').hasClass('r-tabs-nav'), true, 'nav class was added correctly');
-        assert.equal($tabs.find('> ul > li').hasClass('r-tabs-tab'), true, 'nav class was added correctly');
-        assert.equal($tabs.find('#tab-1').hasClass('r-tabs-panel'), true, 'panel class was added correctly');
+        assert.ok($element.responsiveTabs(), 'can be added');
+        assert.equal($element.hasClass('r-tabs'), true, 'r-tabs class');
+        assert.equal($tabNav.hasClass('r-tabs-nav'), true, 'r-tabs-nav class');
+        assert.equal($tabs.hasClass('r-tabs-tab'), true, 'r-tabs-tab class');
     });
+
+
 
 }(jQuery, QUnit));
