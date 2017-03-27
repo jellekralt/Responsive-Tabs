@@ -18,18 +18,19 @@ var config = {
 };
 
 gulp.task('release', function(cb) {
-    runSequence('test', 'bump', 'build', cb);
+    runSequence('bump', 'build', cb);
 });
 
 // Build
-gulp.task('build', ['test'], function() {
+gulp.task('build', function() {
     var pkg = require('./package.json');
+    var author = pkg.author.split(' <')[0];
     var banner = ['/**',
         ' * <%= pkg.name %>',
         ' * ',
         ' * <%= pkg.description %>',
         ' * ',
-        ' * @author <%= pkg.author %>',
+        ' * @author <%= author %>',
         ' * @version v<%= pkg.version %>',
         ' * @license <%= pkg.license %>',
         ' */',
@@ -39,7 +40,7 @@ gulp.task('build', ['test'], function() {
 		.pipe(uglify({
 			preserveComments: 'some'
 		}))
-        .pipe(header(banner, { pkg : pkg } ))
+        .pipe(header(banner, { pkg: pkg, author: author } ))
 		.pipe(rename({
 			extname: '.min.js'
 		}))
