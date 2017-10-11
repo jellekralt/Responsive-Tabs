@@ -75,7 +75,7 @@ Get
     
 ### CDN
 
-Responsive Tabs is available on [jsDelivr](http://www.jsdelivr.com/)
+Responsive Tabs is available on [jsDelivr](http://www.jsdelivr.com/) [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/responsive-tabs/badge)](https://www.jsdelivr.com/package/npm/responsive-tabs)
 
     http://www.jsdelivr.com/#!jquery.responsive-tabs
     
