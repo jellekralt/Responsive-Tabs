@@ -193,6 +193,22 @@ scrollToAccordionOffset: false, // (default) disables the auto scrolling to the 
 scrollToAccordionOffset: true, // enables the auto scrolling to the accordion panel
 ```
 
+### Navigation container
+This option can be used to select a different container element for the navigation `<ul>`.
+
+```javascript
+navigationContainer: '.some-css-selector'
+```
+
+```html
+<div class="some-css-selector">
+    <ul>
+        <li>Tab</li>
+        ...
+    </ul>
+</div>
+```
+
 Callbacks
 ---------
 
