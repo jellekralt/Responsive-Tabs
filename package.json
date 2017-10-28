@@ -1,6 +1,6 @@
 {
   "name": "responsive-tabs",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "author": "Jelle Kralt <jelle@jellekralt.nl>",
   "description": "jQuery plugin that provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.",
   "contributors": [
