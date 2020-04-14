@@ -290,7 +290,7 @@
             startTab = this._getTab(tabRef);
         } else if(this.options.active > 0 && !this._getTab(this.options.active).disabled) {
             startTab = this._getTab(this.options.active);
-        } else {
+        } else (!window.matchMedia('(max-width: 646px)').matches) {
             // If not, just get the first one
             startTab = this._getTab(0);
         }
@@ -340,6 +340,10 @@
      * @param {Boolean} stopRotation - Defines if the tab rotation loop should be stopped
      */
     ResponsiveTabs.prototype._openTab = function(e, oTab, closeCurrent, stopRotation) {
+        if (oTab === undefined) {
+			return;
+		}
+
         var _this = this;
         var scrollOffset;
 
