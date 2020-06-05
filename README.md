@@ -1,11 +1,17 @@
-jQuery Responsive Tabs+
+jQuery Responsive Tabs+ v1.6.4
 ==============
 
 This jQuery plugin provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.
 Check out a demo at http://jellekralt.github.io/Responsive-Tabs/
 
-+ Browser history buttons now working.
+Version log
+=========
+__v1.6.4__ - updated 05.06.2020
 
++ Browser history buttons now working
++ activate method, supports selector name
+
+__v1.6.3__ Forked
 
 Features
 =========
@@ -22,7 +28,6 @@ Features
 + The tabs are controllable with API methods
 + Cross browser compatibility (IE7+, Chrome, Firefox, Safari and Opera)
 + Multiple device support (Web, Tablet, Mobile, etc)
-
 
 How to use
 ==========
@@ -65,13 +70,21 @@ $('#responsiveTabsDemo').responsiveTabs({
 });
 ```
 
-Get
-=======
+Get this version
+================
+
+### bower.json
+
+    "responsive-tabs": "steinhaug/Responsive-Tabs#^1.6.x"
+
+Get original version
+====================
 
 ### Bower
 
     bower install responsive-tabs
     
+
 ### NPM
 
     npm install responsive-tabs
@@ -277,6 +290,12 @@ This method activates/opens a tab by using a zero based tab reference
 ```javascript
 $('#responsiveTabsDemo').responsiveTabs('activate', 1); // This would open the second tab
 ```
+or using the tab selector name reference
+
+```javascript
+$('#responsiveTabsDemo').responsiveTabs('activate', '#tab-1'); // This would open the tab with given selector
+```
+
 
 ### Deactivate
 This method deactivates/closes a tab by using a zero based tab reference

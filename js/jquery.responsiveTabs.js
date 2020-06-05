@@ -586,10 +586,22 @@
      */
     ResponsiveTabs.prototype.activate = function(tabRef, stopRotation) {
         var e = jQuery.Event('tabs-activate');
+
+        if( ! this.isNumber(tabRef) ){
+            tabRef = this._getTabRefBySelector(tabRef);
+        }
+
         var oTab = this._getTab(tabRef);
         if(!oTab.disabled) {
             this._openTab(e, oTab, true, stopRotation || true);
         }
+    };
+
+    /**
+     * This function validates a variable as number
+     */
+    ResponsiveTabs.prototype.isNumber = function(n) {
+        return !isNaN(parseFloat(n)) && !isNaN(n - 0);
     };
 
     /**
