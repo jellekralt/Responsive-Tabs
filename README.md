@@ -1,4 +1,4 @@
-jQuery Responsive Tabs+ v1.6.4
+jQuery Responsive Tabs+
 ==============
 
 This jQuery plugin provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.
@@ -6,10 +6,13 @@ Check out a demo at http://jellekralt.github.io/Responsive-Tabs/
 
 Version log
 =========
+__v1.6.5__ - updated 05.06.2020
+
++ activate method, supports selector name
+
 __v1.6.4__ - updated 05.06.2020
 
 + Browser history buttons now working
-+ activate method, supports selector name
 
 __v1.6.3__ Forked
 
