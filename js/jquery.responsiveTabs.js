@@ -252,7 +252,8 @@
                     }
                 }
 
-                e.data.tab._ignoreHashChange = true;
+                // https://github.com/jellekralt/Responsive-Tabs/issues/60#issuecomment-573089571
+                //e.data.tab._ignoreHashChange = true;
 
                 // Check if the activated tab isnt the current one or if its collapsible. If not, do nothing
                 if(current !== activatedTab || _this._isCollapisble()) {
