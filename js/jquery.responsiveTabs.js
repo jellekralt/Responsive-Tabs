@@ -2,6 +2,7 @@
 
     /** Default settings */
     var defaults = {
+        version: '1.6.6',
         active: null,
         event: 'click',
         disabled: [],
@@ -18,6 +19,7 @@
         scrollToAccordionOffset: 0,
         accordionTabElement: '<div></div>',
         navigationContainer: '',
+        getversion: function(){},
         click: function(){},
         activate: function(){},
         deactivate: function(){},
@@ -104,11 +106,13 @@
         // Define plugin events
         //
 
-        // Activate: this event is called when a tab is selected
+        // Click: this event is called when a tab is clicked
         this.$element.bind('tabs-click', function(e, oTab) {
             _this.options.click.call(this, e, oTab);
         });
-
+        this.$element.bind('tabs-getversion', function(e, oTab) {
+            _this.options.getversion.call(this, e, oTab);
+        });
         // Activate: this event is called when a tab is selected
         this.$element.bind('tabs-activate', function(e, oTab) {
             _this.options.activate.call(this, e, oTab);
@@ -578,6 +582,13 @@
     //
     // PUBLIC FUNCTIONS
     //
+
+    /**
+     * Return the current script version 
+     */
+    ResponsiveTabs.prototype.getversion = function() {
+        return this.options.version;
+    };
 
     /**
      * This function activates a tab
