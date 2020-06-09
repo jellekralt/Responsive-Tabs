@@ -6,6 +6,10 @@ Check out a demo at http://jellekralt.github.io/Responsive-Tabs/
 
 Version log
 =========
+__v1.6.6__ - updated 09.06.2020
+
+- Overhaulted documentation and files.
+
 __v1.6.5__ - updated 05.06.2020
 
 + activate method, supports selector name
@@ -65,11 +69,23 @@ How to use
 </div>
 ```
 
-* Use this jQuery function to enable responsive tabs on the selected element:
+* Use this jQuery function to enable responsive tabs on the selected element that works correctly with the History API and when initiated as accordion for mobile:
 
 ```javascript
-$('#responsiveTabsDemo').responsiveTabs({
-    startCollapsed: 'accordion'
+var $selTab;
+$(document).ready(function () {
+    $tabs = $('#responsiveTabsDemo');
+    $tabs.responsiveTabs({
+        startCollapsed: 'accordion',
+        activate: function(event, elTab){
+            $selTab = elTab.selector;
+        }
+    });
+    if(typeof($selTab) === "undefined"){
+        var winHash = window.location.hash;
+        if(winHash.length)
+            $tabs.responsiveTabs('activate', winHash);
+    }
 });
 ```
 
@@ -364,9 +380,9 @@ This event is triggered when the state of the plugin changes
 
 Credits
 =========
-The idea for this plugin is based on 'Easy Responsive Tabs to Accordion' by samsono (github.com/samsono)
-
-https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion
++ The idea for this plugin is based on 'Easy Responsive Tabs to Accordion' by [samsono](https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion)
++ Patches and updates applied by [Kim Steinhaug](//github.com/steinhaug/)
++ Fork me on Github ribbons made by [Aral Balkan](https://ar.al/scribbles/fork-me-on-github-retina-ribbons/)
 
 Support
 =======

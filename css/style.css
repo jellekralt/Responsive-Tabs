@@ -1,3 +1,8 @@
+:root {
+  --main-tab-color: #5a9ef7;
+  --border-tab-color: #0956bb;
+}
+
 body {
 	font-family: Arial, Helvetica, Verdana, sans-serif;
 	font-size: 12px;
@@ -9,12 +14,12 @@ body {
 .r-tabs {
 	position: relative;
 
-	background-color: #00c5ad;
+	background-color: var(--main-tab-color);
 
-	border-top: 1px solid #00c5ad;
-	border-right: 1px solid #00c5ad;
-	border-left: 1px solid #00c5ad;
-	border-bottom: 4px solid #00c5ad;
+	border-top: 1px solid var(--main-tab-color);
+	border-right: 1px solid var(--main-tab-color);
+	border-left: 1px solid var(--main-tab-color);
+	border-bottom: 4px solid var(--main-tab-color);
 	border-radius: 4px;
 
 }
@@ -22,7 +27,7 @@ body {
 /* Tab element */
 .r-tabs .r-tabs-nav .r-tabs-tab {
 	position: relative;
-	background-color: #00c5ad;
+	background-color: var(--main-tab-color);
 }
 
 /* Tab anchor */
@@ -44,7 +49,7 @@ body {
 
 /* Active state tab anchor */
 .r-tabs .r-tabs-nav .r-tabs-state-active .r-tabs-anchor {
-	color: #00c5ad;
+	color: var(--main-tab-color);
 	text-shadow: none;
 
 	background-color: white;
@@ -69,7 +74,7 @@ body {
 	display: block;
 	padding: 10px;
 
-	background-color: #00c5ad;
+	background-color: var(--main-tab-color);
 	color: #fff;
 	font-weight: bold;
 	text-decoration: none;
@@ -83,7 +88,7 @@ body {
 /* Active accordion anchor */
 .r-tabs .r-tabs-accordion-title.r-tabs-state-active .r-tabs-anchor {
 	background-color: #fff;
-	color: #00c5ad;
+	color: var(--main-tab-color);
 	text-shadow: none;
 }
 
@@ -111,8 +116,8 @@ button {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	background-color: #00c5ad;
-	box-shadow: 0px 3px 0px 0px #00ab94;
+	background-color: var(--main-tab-color);
+	box-shadow: 0px 3px 0px 0px var(--border-tab-color);
 	
 	cursor: pointer;
 }
@@ -128,8 +133,8 @@ button {
 
 	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 	font-size: 14px;
-	color: #00c5ad;
-	border: 2px solid #00ab94;
+	color: var(--main-tab-color);
+	border: 2px solid var(--border-tab-color);
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;

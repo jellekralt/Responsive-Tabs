@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
+    <a href="https://github.com/steinhaug/Responsive-Tabs/"><img style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px; z-index: 1" src="img/right-orange@2x.png" alt="Fork me on GitHub"></a>
 
     <!--Horizontal Tab-->
     <div id="horizontalTab">
@@ -22,16 +22,21 @@
         </ul>
 
         <div id="tab-1">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu scelerisque eros. Fusce ante orci, hendrerit sit amet metus sit amet, venenatis sodales felis. Morbi vel mi in leo dignissim convallis in a neque. Suspendisse sollicitudin nibh non dapibus condimentum. Etiam sit amet arcu ultricies, porttitor justo eget, scelerisque urna. Praesent non ligula nec ligula euismod condimentum eget sed augue. Ut feugiat, turpis id sollicitudin vestibulum, tellus massa adipiscing nisl, quis cursus nisl arcu vel ipsum.</p>
+            <h2>V1.6.5</h2>
+            <p>Tested in Chrome, Edge and Firefox with desktop and mobile display with history API.</p>
+            <p>Display screen smaller to enable accordion, and use theese links for testing:</p>
+            <p><a href="demo.html#tab-3">demo.html#tab-3</a></p>
         </div>
         <div id="tab-2">
             <p>Quisque sodales sodales lacus pharetra bibendum. Etiam commodo non velit ac rhoncus. Mauris euismod purus sem, ac adipiscing quam laoreet et. Praesent vulputate ornare sem vel scelerisque. Ut dictum augue non erat lacinia, sed lobortis elit gravida. Proin ante massa, ornare accumsan ultricies et, posuere sit amet magna. Praesent dignissim, enim sed malesuada luctus, arcu sapien sodales sapien, ut placerat eros nunc vel est. Donec tristique mi turpis, et sodales nibh gravida eu. Etiam odio risus, porttitor non lacus id, rhoncus tempus tortor. Curabitur tincidunt molestie turpis, ut luctus nibh sollicitudin vel. Sed vel luctus nisi, at mattis metus. Aenean ultricies dolor est, a congue ante dapibus varius. Nulla at auctor nunc. Curabitur accumsan feugiat felis ut pretium. Praesent semper semper nisi, eu cursus augue.</p>
         </div>
         <div id="tab-3">
-            <p>Mauris facilisis elit ut sem eleifend accumsan molestie sit amet dolor. Pellentesque dapibus arcu eu lorem laoreet, vitae cursus metus mattis. Nullam eget porta enim, eu rutrum magna. Duis quis tincidunt sem, sit amet faucibus magna. Integer commodo, turpis consequat fermentum egestas, leo odio posuere dui, elementum placerat eros erat id augue. Nullam at eros eget urna vestibulum malesuada vitae eu mauris. Aliquam interdum rhoncus velit, quis scelerisque leo viverra non. Suspendisse id feugiat dui. Nulla in aliquet leo. Proin vel magna sed est gravida rhoncus. Mauris lobortis condimentum nibh, vitae bibendum tortor vehicula ac. Curabitur posuere arcu eros.</p>
+            <p>Please use the browser back buttons to see that the plugin correctly remembers the history and places the tabs in correct order.</p>
+            <p>Suspendisse eu sapien aliquam, tempus ex molestie, laoreet ex. Aenean auctor aliquam hendrerit. Proin nec consequat turpis, at suscipit leo. Aliquam vulputate vitae nisl eget posuere. Sed egestas ut tortor eu egestas. Phasellus iaculis volutpat ipsum vitae pellentesque. Sed blandit mollis placerat.</p>
         </div>
         <div id="tab-4">
             <p>Donec egestas facilisis sapien sit amet euismod. Donec mollis lectus neque, in consectetur magna sodales et. Nam rutrum libero vitae magna sollicitudin aliquet. In tristique ultrices euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse pretium congue sodales. Curabitur egestas, metus sed ultrices suscipit, metus nibh vehicula ligula, vel volutpat sapien nibh sed quam. Etiam elementum nisi eu risus congue, ut eleifend lectus ultricies. Vivamus in ligula fermentum, bibendum sapien eget, pretium est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec ut ante non risus rutrum faucibus.</p>
+            <p>Nunc ut tortor a elit commodo posuere. Nullam cursus orci at venenatis congue. Curabitur facilisis cursus mauris, quis pharetra enim pharetra vitae. Etiam sed elit dolor. Maecenas blandit sapien ut elit feugiat imperdiet. Duis libero magna, tempor vel efficitur in, malesuada ac sapien. Aenean hendrerit ligula non placerat aliquam. Pellentesque ante libero, commodo id tempus eget, accumsan eget enim. Pellentesque nec sodales dui, eget mollis nisi. Duis tellus nisl, elementum vitae tempor ac, convallis et dolor. Fusce dapibus dolor neque, eget ornare ante dignissim ut.</p>
         </div>
         <div id="tab-5">
             <p>Proin dignissim faucibus odio sollicitudin sagittis. Phasellus aliquet, erat vitae mollis consectetur, enim lectus ornare libero, et porta mi dui eu tellus. Morbi lobortis, elit at euismod porta, magna lacus mattis massa, a lacinia ligula risus et lectus. Sed et aliquam ligula. Nunc venenatis orci magna, quis facilisis sem porta non. Nunc sodales arcu in consectetur malesuada. Maecenas varius justo lacus, scelerisque viverra tellus luctus eu. Nam imperdiet ultricies suscipit. Ut urna mauris, eleifend quis lacinia non, mollis id libero. Praesent pharetra viverra ipsum at posuere. Quisque commodo tortor nec hendrerit faucibus. Fusce convallis urna et vehicula tincidunt. Duis sed vehicula justo, eu placerat nisi. Donec facilisis augue non turpis semper, eget condimentum mauris malesuada. Nunc in dignissim mi, sed laoreet felis.</p>
@@ -64,14 +69,36 @@
     <script src="js/jquery.responsiveTabs.js" type="text/javascript"></script>
 
     <script type="text/javascript">
+
+        var $selTab;
+
         $(document).ready(function () {
             var $tabs = $('#horizontalTab');
             $tabs.responsiveTabs({
-                rotate: false,
-                startCollapsed: 'accordion',
                 collapsible: 'accordion',
+                startCollapsed: 'accordion',
+                scrollToAccordion: true,
                 setHash: true,
                 disabled: [3,4],
+                rotate: false,
+                activate: function(event, elTab){
+                    $selTab = elTab.selector;
+                    console.log('Tab set: ' + $selTab);
+                },
+                click: function(e, tab) {
+                    $('.info').html('Tab <strong>' + tab.id + '</strong> clicked!');
+                }
+            });
+
+            if(typeof($selTab) === "undefined"){
+                var winHash = window.location.hash;
+                if(winHash.length){
+                    console.log('URL fragment present, we initiate tab if it exists: ' + winHash);
+                    $tabs.responsiveTabs('activate', winHash);
+                }
+            }
+
+/*
                 click: function(e, tab) {
                     $('.info').html('Tab <strong>' + tab.id + '</strong> clicked!');
                 },
@@ -82,7 +109,8 @@
                     //console.log(state);
                     $('.info').html('Switched from <strong>' + state.oldState + '</strong> state to <strong>' + state.newState + '</strong> state!');
                 }
-            });
+*/
+
 
             $('#start-rotation').on('click', function() {
                 $tabs.responsiveTabs('startRotation', 1000);
