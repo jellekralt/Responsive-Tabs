@@ -96,24 +96,18 @@ Get this version
 
     "responsive-tabs": "steinhaug/Responsive-Tabs#^1.6.x"
 
-Get original version
-====================
-
 ### Bower
 
-    bower install responsive-tabs
+    bower install steinhaug/Responsive-Tabs#^1.6.x --save
     
+### Github clone
 
-### NPM
+    git clone https://github.com/steinhaug/Responsive-Tabs.git
 
-    npm install responsive-tabs
-    
-### CDN
+### Github release
 
-Responsive Tabs is available on [jsDelivr](http://www.jsdelivr.com/)
+    https://github.com/steinhaug/Responsive-Tabs/releases/tag/v1.6.6
 
-    http://www.jsdelivr.com/#!jquery.responsive-tabs
-    
 API
 ===
 
