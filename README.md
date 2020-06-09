@@ -2,7 +2,7 @@ jQuery Responsive Tabs+
 ==============
 
 This jQuery plugin provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.
-Check out a demo at http://jellekralt.github.io/Responsive-Tabs/
+Check out a demo at https://steinhaug.github.io/Responsive-Tabs/
 
 Version log
 =========
