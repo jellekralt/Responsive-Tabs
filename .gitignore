@@ -2,3 +2,4 @@ node_modules/
 demo/
 .idea/
 _site/
+package-lock.json

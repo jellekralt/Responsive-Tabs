@@ -21,21 +21,21 @@
     "jquery"
   ],
   "dependencies": {
-    "jquery": ">=1.7.2 <3.0.0"
+    "jquery": "^3.6.0"
   },
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.8.0",
-    "connect-modrewrite": "^0.8.1",
-    "gulp": "^3.9.0",
-    "gulp-bump": "^1.0.0",
-    "gulp-header": "^1.7.1",
-    "gulp-jshint": "^1.11.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0",
-    "node-qunit-phantomjs": "^1.2.1",
-    "qunitjs": "^2.0.1",
-    "run-sequence": "^1.1.5",
-    "yargs": "^3.31.0"
+    "browser-sync": "^2.27.7",
+    "connect-modrewrite": "^0.10.2",
+    "gulp": "^4.0.2",
+    "gulp-bump": "^3.2.0",
+    "gulp-header": "^2.0.9",
+    "gulp-jshint": "^2.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2",
+    "node-qunit-phantomjs": "^2.1.1",
+    "qunitjs": "^2.4.0",
+    "run-sequence": "^2.2.1",
+    "yargs": "^17.3.1"
   }
 }
