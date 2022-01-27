@@ -45,9 +45,9 @@ How to use
 ==========
 
 * Requires jQuery (minimaly jQuery 1.7.0)
-* Include jquery.responsiveTabs.js
+* Include jquery.responsiveTabs.min.js
 ```html
-<script src="js/jquery.responsiveTabs.js"></script>
+<script src="js/jquery.responsiveTabs.min.js"></script>
 ```
 * Include responsive-tabs.css for the basic Tabs to Accordion switching
 ```html
@@ -111,7 +111,7 @@ Get this version
 
 ### Github release
 
-    https://github.com/steinhaug/Responsive-Tabs/releases/tag/v1.6.6
+    https://github.com/steinhaug/Responsive-Tabs/releases/tag/v1.6.7
 
 API
 ===
