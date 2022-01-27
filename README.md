@@ -6,6 +6,11 @@ Check out a demo at https://steinhaug.github.io/Responsive-Tabs/
 
 Version log
 =========
+__v1.6.7__ - updated 17.01.2022
+
+- Upgraded all node modules
+- Updated Gulp script from 3.x to 4.x syntax
+
 __v1.6.6__ - updated 09.06.2020
 
 - Overhaulted documentation and files.
