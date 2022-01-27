@@ -38,7 +38,10 @@ gulp.task('build', function() {
 
 	return gulp.src(config.paths.scripts)
 		.pipe(uglify({
-			preserveComments: 'some'
+			output: {
+                beautify: true,
+                comments: /^!/
+            }
 		}))
         .pipe(header(banner, { pkg: pkg, author: author } ))
 		.pipe(rename({
@@ -69,17 +72,18 @@ gulp.task('lint', function() {
 });
 
 // Test
-gulp.task('test', function() {
+gulp.task('test', function(cb) {
 	qunit('./test/fixture.html');
+    cb();
 });
 
 // Watch
-gulp.task('watch', function() {
-	gulp.watch(config.paths.scripts, ['lint']);
-});
+function watch () {
+	gulp.watch(config.paths.scripts, gulp.series('lint'));
+}
 
 // Serve
-gulp.task('serve', ['watch'], function() {
+gulp.task('serve', gulp.series(watch), function() {
     browserSync.init({
         server: {
             baseDir: './',
@@ -94,4 +98,4 @@ gulp.task('serve', ['watch'], function() {
     gulp.watch('*.html').on('change', browserSync.reload);
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', gulp.series('serve'));
