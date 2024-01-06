@@ -1,0 +1,35 @@
+---
+---
+
+@import 'jekyll-theme-leap-day';
+
+body {
+    color:#2b2b2b;
+    background: url(../images/body-background.png) #e9eae6;
+}
+header {
+    background: url(../images/background.png) #faff0c;
+}
+header h1 {
+    color: #373835;
+    text-shadow: 0px 2px 0px #fdffac;
+}
+header p {
+    color: #3b3b3b;
+}
+#banner {
+    background: #9b9b9b;
+    border: 1px solid #747474;
+}
+#banner .downloads span {
+    color: #eae2c1;
+}
+#banner .button {
+    border: 1px solid #d5d40c;
+    background: linear-gradient(#fffc84, #d5d40c);
+    background-color: #fffc84;
+    border-radius: 10px;
+}
+#banner .fork {
+    background-color: #fffc84;
+}
