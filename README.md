@@ -1,8 +1,29 @@
-jQuery Responsive Tabs
+jQuery Responsive Tabs+
 ==============
 
 This jQuery plugin provides responsive tab functionality. The tabs transform to an accordion when it reaches a CSS breakpoint.
-Check out a demo at http://jellekralt.github.io/Responsive-Tabs/
+Check out a demo at https://steinhaug.github.io/Responsive-Tabs/
+
+Version log
+=========
+__v1.6.7__ - updated 17.01.2022
+
+- Upgraded all node modules
+- Updated Gulp script from 3.x to 4.x syntax
+
+__v1.6.6__ - updated 09.06.2020
+
+- Overhaulted documentation and files.
+
+__v1.6.5__ - updated 05.06.2020
+
++ activate method, supports selector name
+
+__v1.6.4__ - updated 05.06.2020
+
++ Browser history buttons now working
+
+__v1.6.3__ Forked
 
 Features
 =========
@@ -20,14 +41,13 @@ Features
 + Cross browser compatibility (IE7+, Chrome, Firefox, Safari and Opera)
 + Multiple device support (Web, Tablet, Mobile, etc)
 
-
 How to use
 ==========
 
 * Requires jQuery (minimaly jQuery 1.7.0)
-* Include jquery.responsiveTabs.js
+* Include jquery.responsiveTabs.min.js
 ```html
-<script src="js/jquery.responsiveTabs.js"></script>
+<script src="js/jquery.responsiveTabs.min.js"></script>
 ```
 * Include responsive-tabs.css for the basic Tabs to Accordion switching
 ```html
@@ -54,31 +74,45 @@ How to use
 </div>
 ```
 
-* Use this jQuery function to enable responsive tabs on the selected element:
+* Use this jQuery function to enable responsive tabs on the selected element that works correctly with the History API and when initiated as accordion for mobile:
 
 ```javascript
-$('#responsiveTabsDemo').responsiveTabs({
-    startCollapsed: 'accordion'
+var $selTab;
+$(document).ready(function () {
+    $tabs = $('#responsiveTabsDemo');
+    $tabs.responsiveTabs({
+        startCollapsed: 'accordion',
+        activate: function(event, elTab){
+            $selTab = elTab.selector;
+        }
+    });
+    if(typeof($selTab) === "undefined"){
+        var winHash = window.location.hash;
+        if(winHash.length)
+            $tabs.responsiveTabs('activate', winHash);
+    }
 });
 ```
 
-Get
-=======
+Get this version
+================
+
+### bower.json
+
+    "responsive-tabs": "steinhaug/Responsive-Tabs#^1.6.x"
 
 ### Bower
 
-    bower install responsive-tabs
+    bower install steinhaug/Responsive-Tabs#^1.6.x --save
     
-### NPM
+### Github clone
 
-    npm install responsive-tabs
-    
-### CDN
+    git clone https://github.com/steinhaug/Responsive-Tabs.git
 
-Responsive Tabs is available on [jsDelivr](http://www.jsdelivr.com/)
+### Github release
 
-    http://www.jsdelivr.com/#!jquery.responsive-tabs
-    
+    https://github.com/steinhaug/Responsive-Tabs/releases/tag/v1.6.7
+
 API
 ===
 
@@ -274,6 +308,12 @@ This method activates/opens a tab by using a zero based tab reference
 ```javascript
 $('#responsiveTabsDemo').responsiveTabs('activate', 1); // This would open the second tab
 ```
+or using the tab selector name reference
+
+```javascript
+$('#responsiveTabsDemo').responsiveTabs('activate', '#tab-1'); // This would open the tab with given selector
+```
+
 
 ### Deactivate
 This method deactivates/closes a tab by using a zero based tab reference
@@ -339,9 +379,9 @@ This event is triggered when the state of the plugin changes
 
 Credits
 =========
-The idea for this plugin is based on 'Easy Responsive Tabs to Accordion' by samsono (github.com/samsono)
-
-https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion
++ The idea for this plugin is based on 'Easy Responsive Tabs to Accordion' by [samsono](https://github.com/samsono/Easy-Responsive-Tabs-to-Accordion)
++ Patches and updates applied by [Kim Steinhaug](//github.com/steinhaug/)
++ Fork me on Github ribbons made by [Aral Balkan](https://ar.al/scribbles/fork-me-on-github-retina-ribbons/)
 
 Support
 =======

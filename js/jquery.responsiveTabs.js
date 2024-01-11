@@ -2,6 +2,7 @@
 
     /** Default settings */
     var defaults = {
+        version: '1.6.6',
         active: null,
         event: 'click',
         disabled: [],
@@ -18,6 +19,7 @@
         scrollToAccordionOffset: 0,
         accordionTabElement: '<div></div>',
         navigationContainer: '',
+        getversion: function(){},
         click: function(){},
         activate: function(){},
         deactivate: function(){},
@@ -104,11 +106,13 @@
         // Define plugin events
         //
 
-        // Activate: this event is called when a tab is selected
+        // Click: this event is called when a tab is clicked
         this.$element.bind('tabs-click', function(e, oTab) {
             _this.options.click.call(this, e, oTab);
         });
-
+        this.$element.bind('tabs-getversion', function(e, oTab) {
+            _this.options.getversion.call(this, e, oTab);
+        });
         // Activate: this event is called when a tab is selected
         this.$element.bind('tabs-activate', function(e, oTab) {
             _this.options.activate.call(this, e, oTab);
@@ -252,7 +256,8 @@
                     }
                 }
 
-                e.data.tab._ignoreHashChange = true;
+                // https://github.com/jellekralt/Responsive-Tabs/issues/60#issuecomment-573089571
+                //e.data.tab._ignoreHashChange = true;
 
                 // Check if the activated tab isnt the current one or if its collapsible. If not, do nothing
                 if(current !== activatedTab || _this._isCollapisble()) {
@@ -579,16 +584,35 @@
     //
 
     /**
+     * Return the current script version 
+     */
+    ResponsiveTabs.prototype.getversion = function() {
+        return this.options.version;
+    };
+
+    /**
      * This function activates a tab
      * @param {Integer} tabRef - Numeric tab reference
      * @param {Boolean} stopRotation - Defines if the tab rotation should stop after activation
      */
     ResponsiveTabs.prototype.activate = function(tabRef, stopRotation) {
         var e = jQuery.Event('tabs-activate');
+
+        if( ! this.isNumber(tabRef) ){
+            tabRef = this._getTabRefBySelector(tabRef);
+        }
+
         var oTab = this._getTab(tabRef);
         if(!oTab.disabled) {
             this._openTab(e, oTab, true, stopRotation || true);
         }
+    };
+
+    /**
+     * This function validates a variable as number
+     */
+    ResponsiveTabs.prototype.isNumber = function(n) {
+        return !isNaN(parseFloat(n)) && !isNaN(n - 0);
     };
 
     /**
